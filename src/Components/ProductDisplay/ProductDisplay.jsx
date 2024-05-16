@@ -24,6 +24,10 @@ export const ProductDisplay = (props) => {
     setSelectedSize(event.target.value);
   };
 
+  const installmentPrice = (product.price / 6)
+    .toFixed(3)
+    .replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+
   return (
     <>
       <div>
@@ -54,7 +58,10 @@ export const ProductDisplay = (props) => {
                 </svg>
 
                 <p className="text-base text-gray-500 font-light">
-                  {product.installments}
+                  {`6 cuotas fijas de $${installmentPrice.toLocaleString(
+                    "es-MX",
+                    { style: "currency", currency: "MXN" }
+                  )}`}
                 </p>
               </div>
             </div>

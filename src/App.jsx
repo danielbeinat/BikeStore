@@ -8,7 +8,7 @@ import { Category } from "./Pages/Category.jsx";
 import { Product } from "./Pages/Product.jsx";
 import { HeaderPromo } from "../src/Components/HeaderPromo/HeaderPromo.jsx";
 import { ChatBox } from "../src/Components/ChatBox/ChatBox.jsx";
-
+import { Checkout } from "../src/Components/Checkout/Checkout.jsx";
 export const App = () => {
   return (
     <>
@@ -31,6 +31,8 @@ export const App = () => {
         <Route path="/product" element={<Product />}>
           <Route path=":productId" element={<Product />} />
         </Route>
+
+        <Route path="/checkout" element={<Checkout />} />
       </Routes>
 
       <ChatBox />

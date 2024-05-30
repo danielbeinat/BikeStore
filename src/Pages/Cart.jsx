@@ -1,5 +1,6 @@
 import { useContext } from "react";
 import { Context } from "../Context/Context";
+import { Link } from "react-router-dom";
 export const Cart = () => {
   const { AllProducts, cart, removeFromCart, getTotalCartAmount } =
     useContext(Context);
@@ -116,9 +117,14 @@ export const Cart = () => {
               </p>
             </div>
           </div>
-          <button className="bg-black text-white p-2 rounded  " type="submit">
-            Comprar
-          </button>
+          <Link to="/checkout">
+            <button
+              className="bg-black text-white w-full p-2 rounded"
+              type="submit"
+            >
+              Comprar
+            </button>
+          </Link>
         </div>
       </div>
     </>

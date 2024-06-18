@@ -1,6 +1,13 @@
 import { Link } from "react-router-dom";
 
-export const Breadcrumbs = (props) => {
+interface BreadcrumbsProps {
+  product: {
+    category: string;
+    name: string;
+  };
+}
+
+export const Breadcrumbs: React.FC<BreadcrumbsProps> = (props) => {
   const { product } = props;
 
   return (

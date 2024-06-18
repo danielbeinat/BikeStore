@@ -1,10 +1,10 @@
-import { useState } from "react";
+import { FormEvent, useState } from "react";
 
-export const ChatBox = () => {
-  const [Show, setShow] = useState(false);
-  const [enviado, setEnviado] = useState(false);
+export const ChatBox: React.FC = () => {
+  const [Show, setShow] = useState<boolean>(false);
+  const [enviado, setEnviado] = useState<boolean>(false);
 
-  const HandlerSubmit = (e) => {
+  const HandlerSubmit = (e: FormEvent) => {
     e.preventDefault();
 
     setEnviado(true);
@@ -131,7 +131,6 @@ export const ChatBox = () => {
                   </label>
                   <textarea
                     className="bg-transparent text-sm outline-none border-blue-500 text-white resize-none"
-                    type="text"
                     name="consulta"
                     id="consulta"
                     required

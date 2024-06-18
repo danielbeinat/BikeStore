@@ -1,9 +1,19 @@
 import { useContext } from "react";
-import { Context } from "../Context/Context";
+import { Context, ContextValue } from "../Context/Context";
 import { Link } from "react-router-dom";
+
+interface Item {
+  id: number;
+  image: string;
+  name: string;
+  price: number;
+  // Agrega cualquier otra propiedad que tenga tu aplicación
+}
 export const Cart = () => {
-  const { AllProducts, cart, removeFromCart, getTotalCartAmount } =
-    useContext(Context);
+  const { AllProducts, cart, removeFromCart, getTotalCartAmount } = useContext(
+    Context
+  ) as ContextValue;
+
   return (
     <>
       <div className="font-poppins flex flex-col lg:flex-row justify-between gap-10 lg:px-20 px-8 mt-10 mb-16">
@@ -34,7 +44,7 @@ export const Cart = () => {
               </tr>
             </thead>
             <tbody>
-              {AllProducts.map((item) => {
+              {AllProducts.map((item: Item) => {
                 if (cart[item.id] > 0) {
                   return (
                     <tr
@@ -92,10 +102,7 @@ export const Cart = () => {
           </table>
         </div>
 
-        <div
-          className="flex flex-col gap-4 h-fit shadow-lg p-4 w-64 lg:w-80 rounded
-"
-        >
+        <div className="flex flex-col gap-4 h-fit shadow-lg p-4 w-64 lg:w-80 rounded">
           <h1 className="text-center font-bold">Resumen de Compra</h1>
           <div>
             <div className="flex justify-between py-5 mx-auto">

@@ -1,4 +1,4 @@
-export const SecurityInformation = () => {
+export const SecurityInformation: React.FC = () => {
   return (
     <>
       <div className="flex gap-5 flex-col">

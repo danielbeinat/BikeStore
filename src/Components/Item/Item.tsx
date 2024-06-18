@@ -1,6 +1,14 @@
 import { Link } from "react-router-dom";
 
-export const Item = (props) => {
+interface propsitem {
+  id: number;
+  image: string;
+  name: string;
+  price: number;
+  type: string;
+}
+
+export const Item: React.FC<propsitem> = (props) => {
   const installmentPrice = (props.price / 6)
     .toFixed(3)
     .replace(/\B(?=(\d{3})+(?!\d))/g, ",");
@@ -12,7 +20,7 @@ export const Item = (props) => {
           src={props.image}
           alt={props.name}
           className="h-80 w-72 object-contain rounded-t-xl"
-          onClick={window.scrollTo(0, 0)}
+          onClick={() => window.scrollTo(0, 0)}
         />
       </Link>
       <div className="px-4 w-72 flex items-center gap-2 flex-col">
@@ -23,17 +31,31 @@ export const Item = (props) => {
           {props.name}
         </p>
         <div className="flex items-center gap-2 flex-col ">
-          <p className="text-lg font-semibold">${props.price}</p>
+          <p className="text-lg font-semibold">
+            {" "}
+            ${props.price.toLocaleString()}
+          </p>
+
           <div>
-            <p className="text-sm text-gray-600">{`6 cuotas fijas de $${installmentPrice.toLocaleString(
-              "es-MX",
-              { style: "currency", currency: "MXN" }
-            )}`}</p>
+            {/* <p className="text-sm text-gray-600">
+              {`6 cuotas fijas de $${new Intl.NumberFormat("es-MX", {
+                style: "currency",
+                currency: "MXN",
+              }).format(Number(installmentPrice.replace(/,/g, "")))}`}
+            </p> */}
+
+            <p className="text-base text-gray-500 font-light">
+              {`6 cuotas fijas de $${installmentPrice.toLocaleString({
+                style: "currency",
+                currency: "MXN",
+              })}`}
+            </p>
           </div>
           <div className="pb-5 mt-2">
             <Link
               to={`/product/${props.id}`}
               className="text-white text-sm bg-black px-2 py-2 rounded shadow-lg hover:bg-gray-800"
+              onClick={() => window.scrollTo(0, 0)}
             >
               Agregar al carrito
             </Link>
@@ -41,7 +63,7 @@ export const Item = (props) => {
         </div>
       </div>
 
-      {props.price >= 50.0 && (
+      {props.price >= 50000 && (
         <div className="absolute top-0 right-0 p-3">
           <p className="text-xs bg-black text-white px-2 py-1 rounded-full">
             Envio Gratis

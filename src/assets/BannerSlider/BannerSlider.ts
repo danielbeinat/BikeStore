@@ -2,7 +2,12 @@ import banner1 from "./banner1.webp";
 import banner2 from "./banner2.webp";
 import banner3 from "./banner3.webp";
 
-export const Banner = [
+interface Banner {
+  id: number;
+  image: string;
+}
+
+export const Banner: Banner[] = [
   {
     id: 1,
     image: banner1,

@@ -1,9 +1,22 @@
 import { AllProducts } from "../../assets/AllProducts/AllProducts";
 import { Item } from "../Item/Item";
 
-export const RelatedProducts = ({ category }) => {
+interface propcategory {
+  category: string;
+}
+
+interface Product {
+  id: number;
+  image: string;
+  name: string;
+  price: number;
+  category: string;
+  type?: any;
+}
+
+export const RelatedProducts: React.FC<propcategory> = ({ category }) => {
   // Filtrar los productos basados en la categoría del producto actual
-  const relatedProducts = AllProducts.filter(
+  const relatedProducts: Product[] = AllProducts.filter(
     (product) => product.category === category
   ).slice(0, 4);
 
@@ -21,7 +34,8 @@ export const RelatedProducts = ({ category }) => {
               id={product.id}
               image={product.image}
               name={product.name}
-              price={product.price.toLocaleString()}
+              price={product.price}
+              type={product.type}
             />
           ))}
         </div>

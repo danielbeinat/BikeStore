@@ -1,13 +1,15 @@
-import { useContext } from "react";
-import { Context } from "../../Context/Context";
-export const Checkout = () => {
-  const { getTotalCartAmount } = useContext(Context);
+import React, { useContext } from "react";
+import { Context, ContextValue } from "../../Context/Context";
+
+export const Checkout: React.FC = () => {
+  const { getTotalCartAmount } = useContext(Context) as ContextValue;
+
   return (
     <>
-      <div className="font-poppins flex flex-col lg:flex-row  gap-10 lg:px-20 px-8 mt-10 mb-16">
+      <div className="font-poppins flex flex-col lg:flex-row gap-10 lg:px-20 px-8 mt-10 mb-16">
         <div className="flex flex-col gap-10 md:w-[750px]">
-          <div className="flex flex-col gap-4  w-full">
-            <h1>1 - Email </h1>
+          <div className="flex flex-col gap-4 w-full">
+            <h1>1 - Email</h1>
             <input className="md:w-[400px] rounded-full" type="text" />
             <button className="bg-black text-white p-2 rounded w-32">
               Siguiente
@@ -34,7 +36,7 @@ export const Checkout = () => {
             </div>
             <hr />
             <div className="flex justify-between py-5 mx-auto">
-              <p className="text-gray-500">Envio</p>
+              <p className="text-gray-500">Envío</p>
               <p className="text-gray-500">Gratis</p>
             </div>
             <hr />

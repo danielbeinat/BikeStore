@@ -11,7 +11,11 @@ import shimano from "./shimano.svg";
 import scott from "./scott.svg";
 import trek from "./trek.svg";
 
-export const Bike = [
+interface Bike {
+  id: number;
+  img: string;
+}
+export const Bike: Bike[] = [
   { id: 1, img: bianchi },
   { id: 2, img: cannondale },
   { id: 3, img: cube },

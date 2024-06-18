@@ -4,12 +4,12 @@ import { useParams } from "react-router-dom";
 import { Breadcrumbs } from "../Components/breadcrumbs/Breadcrumbs";
 import { ProductDisplay } from "../Components/ProductDisplay/ProductDisplay";
 
-export const Product = () => {
-  const { AllProducts } = useContext(Context);
+export const Product: React.FC = () => {
+  const { AllProducts } = useContext<any>(Context);
 
   const { productId } = useParams();
 
-  const product = AllProducts.find((e) => e.id === Number(productId));
+  const product = AllProducts.find((e: any) => e.id === Number(productId));
 
   return (
     <>

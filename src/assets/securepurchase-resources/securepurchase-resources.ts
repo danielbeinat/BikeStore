@@ -1,7 +1,13 @@
 import truck from "./truck.svg";
 import card from "./card.svg";
 import box from "./box.svg";
-export const Secure = [
+
+interface secure {
+  image: string;
+  title: string;
+  description: string;
+}
+export const Secure: secure[] = [
   {
     image: truck,
     title: "Aprovechá el beneficio del envío gratis",

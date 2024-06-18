@@ -1,14 +1,26 @@
 import { useContext, useState } from "react";
 import { RelatedProducts } from "../RelatedProducts/RelatedProducts";
-import { Context } from "../../Context/Context";
+import { Context, ContextValue } from "../../Context/Context";
 import { CartModal } from "../CartModal/CartModal";
 
 import { ProductSlider } from "./Slider/ProductSlider.jsx";
 import { SecurityInformation } from "./SecurityInformation/SecurityInformation.jsx";
 
-export const ProductDisplay = (props) => {
+interface propsitems {
+  product: {
+    name: string;
+    id: number;
+    image: string;
+    price: number;
+    category: string;
+    sizes?: string[];
+    type?: any;
+  };
+}
+
+export const ProductDisplay: React.FC<propsitems> = (props) => {
   const { product } = props;
-  const [isOpen, setIsOpen] = useState(false);
+  const [isOpen, setIsOpen] = useState<boolean>(false);
 
   const toggleModal = () => {
     setIsOpen(!isOpen);
@@ -18,9 +30,9 @@ export const ProductDisplay = (props) => {
     product.sizes && product.sizes.length > 0 ? product.sizes[0] : "";
   const [selectedSize, setSelectedSize] = useState(defaultSize);
 
-  const { addToCart } = useContext(Context);
+  const { addToCart } = useContext(Context) as ContextValue;
 
-  const handleSizeChange = (event) => {
+  const handleSizeChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setSelectedSize(event.target.value);
   };
 

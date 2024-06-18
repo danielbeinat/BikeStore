@@ -1,15 +1,30 @@
 import { Fragment } from "react";
-
 import { Dialog, Transition } from "@headlessui/react";
 import { XMarkIcon } from "@heroicons/react/24/outline";
-import { Context } from "../../Context/Context";
+import { Context, ContextValue } from "../../Context/Context";
 import { useContext } from "react";
 
 import { Link } from "react-router-dom";
 
-export const CartModal = ({ open, setOpen }) => {
-  const { AllProducts, cart, removeFromCart, getTotalCartAmount } =
-    useContext(Context);
+interface Product {
+  id: number;
+  image: string;
+  name: string;
+  price: number;
+  category: string;
+  type?: any;
+  href?: string;
+}
+
+type propstate = {
+  open: boolean;
+  setOpen: React.Dispatch<React.SetStateAction<boolean>>;
+};
+
+export const CartModal: React.FC<propstate> = ({ open, setOpen }) => {
+  const { AllProducts, cart, removeFromCart, getTotalCartAmount } = useContext(
+    Context
+  ) as ContextValue;
 
   return (
     <Transition.Root show={open} as={Fragment}>
@@ -64,7 +79,7 @@ export const CartModal = ({ open, setOpen }) => {
                             role="list"
                             className="-my-6 divide-y divide-gray-200"
                           >
-                            {AllProducts.map((product) => {
+                            {AllProducts.map((product: Product) => {
                               if (cart[product.id] > 0) {
                                 return (
                                   <li key={product.id} className="flex py-6">

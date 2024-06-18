@@ -14,7 +14,7 @@ import {
 
 import { Link } from "react-router-dom";
 
-export const Footer = () => {
+export const Footer: React.FC = () => {
   return (
     <>
       <footer className="font-poppins">

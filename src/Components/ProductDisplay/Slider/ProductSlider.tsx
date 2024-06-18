@@ -6,19 +6,30 @@ import "swiper/css/free-mode";
 import "swiper/css/navigation";
 import "swiper/css/thumbs";
 
+interface productprops {
+  product: {
+    id: number;
+    image: string;
+    name: string;
+    price: number;
+  };
+}
+
 import { FreeMode, Navigation, Thumbs } from "swiper/modules";
 
-export const ProductSlider = ({ product }) => {
-  const [thumbsSwiper, setThumbsSwiper] = useState(null);
+export const ProductSlider: React.FC<productprops> = ({ product }) => {
+  const [thumbsSwiper, setThumbsSwiper] = useState<any>(null);
 
   return (
     <>
       <div className="relative w-full mb-4 lg:w-1/2 lg:h-1/2 ">
         <Swiper
-          style={{
-            "--swiper-navigation-color": "#fff",
-            "--swiper-pagination-color": "#fff",
-          }}
+          style={
+            {
+              "--swiper-navigation-color": "#fff",
+              "--swiper-pagination-color": "#fff",
+            } as any
+          }
           loop={false}
           spaceBetween={10}
           navigation={false}

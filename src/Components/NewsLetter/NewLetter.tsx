@@ -1,4 +1,4 @@
-export const NewLetter = () => {
+export const NewLetter: React.FC = () => {
   return (
     <>
       <div className="font-poppins  flex flex-col items-center align-center content-center justify-center bg-gray-900 py-16 gap-10 mt-24 pl-5 pr-5">

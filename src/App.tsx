@@ -1,15 +1,15 @@
 import { Routes, Route } from "react-router-dom";
-import { Home } from "./Pages/Home.jsx";
-import { Navbar } from "./Components/Navbar/Navbar.jsx";
-import { Account } from "./Pages/Account.jsx";
-import { Cart } from "./Pages/Cart.jsx";
-import { Footer } from "./Components/Footer/Footer.jsx";
-import { Category } from "./Pages/Category.jsx";
-import { Product } from "./Pages/Product.jsx";
-import { HeaderPromo } from "../src/Components/HeaderPromo/HeaderPromo.jsx";
-import { ChatBox } from "../src/Components/ChatBox/ChatBox.jsx";
-import { Checkout } from "../src/Components/Checkout/Checkout.jsx";
-export const App = () => {
+import { Home } from "./Pages/Home";
+import { Navbar } from "./Components/Navbar/Navbar";
+import { Account } from "./Pages/Account";
+import { Cart } from "./Pages/Cart";
+import { Footer } from "./Components/Footer/Footer";
+import { Category } from "./Pages/Category";
+import { Product } from "./Pages/Product";
+import { HeaderPromo } from "./Components/HeaderPromo/HeaderPromo";
+import { ChatBox } from "./Components/ChatBox/ChatBox";
+import { Checkout } from "./Components/Checkout/Checkout";
+export const App: React.FC = () => {
   return (
     <>
       <HeaderPromo />

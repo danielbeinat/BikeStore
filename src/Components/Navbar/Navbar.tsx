@@ -2,13 +2,14 @@ import { useState } from "react";
 import { NavLink, Link } from "react-router-dom";
 import { useContext } from "react";
 import { CartModal } from "../CartModal/CartModal";
-import { Context } from "../../Context/Context";
+import { Context, ContextValue } from "../../Context/Context";
 import bike2 from "../../assets/bike2.png";
 
-export const Navbar = () => {
-  const [isOpen, setIsOpen] = useState(false);
-  const { getTotalcartItems } = useContext(Context);
-  const [menuOpen, setMenuOpen] = useState(false);
+export const Navbar: React.FC = () => {
+  const [isOpen, setIsOpen] = useState<boolean>(false);
+  const { getTotalcartItems } = useContext(Context) as ContextValue;
+
+  const [menuOpen, setMenuOpen] = useState<boolean>(false);
 
   const Navlink = [
     { name: "Inicio", to: "/" },
@@ -133,7 +134,7 @@ export const Navbar = () => {
             </svg>
           </Link>
 
-          <Link className="relative" onClick={toggleModal}>
+          <div className="relative" onClick={toggleModal}>
             <svg
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
@@ -152,7 +153,7 @@ export const Navbar = () => {
             <span className="absolute top-0 right-0 inline-flex items-center justify-center px-2 py-1 text-xs font-bold leading-none text-red-100 transform translate-x-1/2 -translate-y-1/2 bg-red-600 rounded-full">
               {getTotalcartItems()}
             </span>
-          </Link>
+          </div>
           <CartModal open={isOpen} setOpen={setIsOpen} />
         </div>
       </header>

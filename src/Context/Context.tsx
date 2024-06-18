@@ -1,25 +1,39 @@
 import { createContext, useState } from "react";
-import { AllProducts } from "../assets/AllProducts/AllProducts.js";
+import { AllProducts, Product } from "../assets/AllProducts/AllProducts";
 
-export const Context = createContext(null);
+export interface ContextValue {
+  AllProducts: Product[];
+  cart: { [key: number]: number };
+  setcart: React.Dispatch<React.SetStateAction<{ [key: number]: number }>>;
+  addToCart: (itemId: number) => void;
+  removeFromCart: (itemId: number) => void;
+  getTotalCartAmount: () => number;
+  getTotalcartItems: () => number;
+}
+
+export const Context = createContext<ContextValue | null>(null);
 
 const getDefaultCart = () => {
-  let cart = {};
+  let cart: { [key: number]: number } = {};
   for (let i = 0; i < AllProducts.length + 1; i++) {
     cart[i] = 0;
   }
   return cart;
 };
 
-export const ContextProvider = (props) => {
-  const [cart, setcart] = useState(getDefaultCart());
+interface ContextProviderProps {
+  children: React.ReactNode;
+}
+
+export const ContextProvider: React.FC<ContextProviderProps> = (props) => {
+  const [cart, setcart] = useState<{ [key: number]: number }>(getDefaultCart());
   console.log(cart);
 
-  const addToCart = (itemId) => {
+  const addToCart = (itemId: number) => {
     setcart((prev) => ({ ...prev, [itemId]: prev[itemId] + 1 }));
   };
 
-  const removeFromCart = (itemId) => {
+  const removeFromCart = (itemId: number) => {
     setcart((prev) => ({ ...prev, [itemId]: prev[itemId] - 1 }));
   };
 
@@ -30,7 +44,9 @@ export const ContextProvider = (props) => {
         let itemInfo = AllProducts.find(
           (product) => product.id === Number(item)
         );
-        total += cart[item] * itemInfo.price;
+        if (itemInfo) {
+          total += cart[item] * itemInfo.price;
+        }
       }
     }
     return total;
@@ -45,7 +61,8 @@ export const ContextProvider = (props) => {
     }
     return total;
   };
-  const contextvalue = {
+
+  const contextvalue: ContextValue = {
     AllProducts,
     cart,
     setcart,

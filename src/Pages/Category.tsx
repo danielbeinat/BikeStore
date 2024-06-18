@@ -1,13 +1,30 @@
 import { useContext, useState } from "react";
-import { Context } from "../Context/Context.jsx";
+import { Context, ContextValue } from "../Context/Context.jsx";
 import { Item } from "../Components/Item/Item.jsx";
 import { Link } from "react-router-dom";
 
-export const Category = (props) => {
-  const { AllProducts } = useContext(Context);
-  const [sortedProducts, setSortedProducts] = useState([...AllProducts]);
+interface propsproduct {
+  Category: string;
+}
 
-  const handleSortChange = (e) => {
+interface Product {
+  id: number;
+  image: string;
+  name: string;
+  price: number;
+  category: string;
+  type?: any;
+}
+
+// El context se crea con `| null` en el tipo, para reflejar con exactitud el valor predeterminado.
+export const Category: React.FC<propsproduct> = (props) => {
+  const { AllProducts } = useContext(Context) as ContextValue;
+
+  const [sortedProducts, setSortedProducts] = useState<Product[]>([
+    ...AllProducts,
+  ]);
+
+  const handleSortChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     const value = e.target.value;
     let newSortedProducts = [...AllProducts];
 
@@ -68,7 +85,8 @@ export const Category = (props) => {
                   id={product.id}
                   image={product.image}
                   name={product.name}
-                  price={product.price.toLocaleString()}
+                  price={product.price}
+                  type={product.type}
                 />
               );
             } else {

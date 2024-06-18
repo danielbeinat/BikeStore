@@ -1,4 +1,4 @@
-export const HeaderPromo = () => {
+export const HeaderPromo: React.FC = () => {
   return (
     <>
       <div className="font-poppins hidden lg:block flex items-center justify-center py-3 bg-gray-800">

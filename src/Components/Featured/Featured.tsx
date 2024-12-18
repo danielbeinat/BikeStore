@@ -6,16 +6,14 @@ interface Product {
   image: string;
   name: string;
   price: number;
-  category: string; // Agregamos el campo category para la función de filtrado
+  category: string;
   type?: any;
 }
 
-// Filtramos los productos de la categoría "Indumentaria"
 const filter: Product[] = AllProducts.filter(
   (product) => product.category === "Indumentaria"
 );
 
-// Tomamos los primeros 4 productos filtrados
 const bike: Product[] = filter.slice(0, 4);
 
 export const Featured: React.FC = () => {

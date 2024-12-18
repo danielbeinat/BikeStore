@@ -56,7 +56,6 @@ export const Slider: React.FC = () => {
         </SwiperSlide>
       ))}
 
-      {/* Estilos personalizados con Tailwind CSS */}
       <div className="swiper-button-next bg-gray-200 hidden lg:flex text-gray-800 h-10 w-10 p-6 rounded-lg text-xs"></div>
       <div className="swiper-button-prev bg-gray-200 hidden lg:flex text-gray-800 h-10 w-10 p-6 rounded-lg text-xs"></div>
       <div className="swiper-pagination text-white">

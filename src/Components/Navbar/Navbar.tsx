@@ -1,162 +1,202 @@
-import { useState } from "react";
+import { useState, useContext, useEffect } from "react";
 import { NavLink, Link } from "react-router-dom";
-import { useContext } from "react";
-import { CartModal } from "../CartModal/CartModal";
 import { Context, ContextValue } from "../../Context/Context";
-import bike2 from "../../assets/bike2.png";
+import { CartModal } from "../CartModal/CartModal";
+import Bikeshoop from "../../assets/Bikeshoop.png";
 
 export const Navbar: React.FC = () => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
+  const [menuOpen, setMenuOpen] = useState<boolean>(false);
+  const [showBanner, setShowBanner] = useState<boolean>(true);
+  const [lastScrollY, setLastScrollY] = useState<number>(0);
   const { getTotalcartItems } = useContext(Context) as ContextValue;
 
-  const [menuOpen, setMenuOpen] = useState<boolean>(false);
-
   const Navlink = [
-    { name: "Inicio", to: "/" },
-    { name: "Bicicletas", to: "/bicicletas" },
-    { name: "Accesorios", to: "/accesorios" },
-    { name: "Indumentaria", to: "/indumentaria" },
-    { name: "Cuenta", to: "/account", lgOnly: true },
+    { name: "INICIO", to: "/" },
+    { name: "NOVEDADES", to: "/novedades" },
+    { name: "BICICLETAS", to: "/bicicletas" },
+    { name: "ACCESORIOS", to: "/accesorios" },
+    { name: "INDUMENTARIA", to: "/indumentaria" },
   ];
 
-  const toggleModal = () => {
-    setIsOpen(!isOpen);
-  };
+  useEffect(() => {
+    const handleScroll = () => {
+      const currentScrollY = window.scrollY;
+      // Muestra el banner solo cuando scrollY está en la parte superior (0)
+      setShowBanner(currentScrollY === 0);
+    };
+
+    window.addEventListener("scroll", handleScroll, { passive: true });
+
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
   return (
-    <>
-      <header className="flex justify-between  items-center lg:py-5 py-3 px-4 font-poppins lg:px-10  ">
-        <div className="flex lg:hidden">
-          <button
-            type="button"
-            className="-m-2.5 inline-flex items-center justify-center rounded-md p-2.5 text-gray-700"
-            onClick={() => setMenuOpen(!menuOpen)}
-          >
-            <span className="sr-only">Open main menu</span>
-            {menuOpen ? (
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 24 24"
-                strokeWidth={1.5}
-                stroke="currentColor"
-                className="h-8 w-8"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  d="M6 18L18 6M6 6l12 12"
-                />
-              </svg>
-            ) : (
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 24 24"
-                strokeWidth={1.5}
-                stroke="currentColor"
-                className="h-8 w-8"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  d="M3 12h18M3 6h18M3 18h18"
-                />
-              </svg>
-            )}
-          </button>
-        </div>
+    <div className="fixed top-0 left-0 right-0 z-50 transition-all font-poppins duration-300">
+      <div
+        className={`bg-black text-white py-2 px-4 text-center transition-all duration-300 ${
+          showBanner ? "translate-y-0" : "-translate-y-full"
+        }`}
+      >
+        <p className="text-sm">
+          3 y 6 CUOTAS FIJAS | ENVÍO GRATIS A PARTIR DE $50.000 ⚡
+        </p>
+      </div>
 
-        <Link to="/">
-          <div className="flex justify-center gap-2 items-center ">
-            <img src={bike2} className="lg:w-14 lg:h-14 w-12 h-12" alt="logo" />
-            <h1 className="text-base font-medium">Bike Store</h1>
-          </div>
-        </Link>
-
-        {/* Mobile Menu */}
-        {menuOpen && (
-          <nav className="lg:hidden absolute inset-x-0 top-16 bg-white z-50 p-4  ">
-            <ul className="flex flex-col items-center space-y-4">
-              {Navlink.map((link) => (
-                <li
-                  className="flex items-center align-center space-x-1"
-                  key={link.name}
-                >
-                  <NavLink onClick={() => setMenuOpen(false)} to={link.to}>
-                    {link.name}
-                  </NavLink>
-                </li>
-              ))}
-            </ul>
-          </nav>
-        )}
-        <nav className="hidden lg:flex lg:gap-x-12">
-          <ul className="flex space-x-10 justify-center items-center">
-            {Navlink.map(
-              (link) =>
-                !link.lgOnly && (
-                  <li
-                    className="flex items-center align-center space-x-4"
-                    key={link.name}
+      <header
+        className={`bg-white font-poppins transition-all duration-300 ${
+          showBanner ? "" : "-translate-y-9 shadow-md"
+        }`}
+      >
+        <div className="container mx-auto px-4 py-4">
+          <div className="flex flex-col lg:flex-row items-center justify-between gap-4">
+            <div className="w-full lg:w-1/4">
+              <div className="relative">
+                <input
+                  type="text"
+                  placeholder="Buscar"
+                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-none"
+                />
+                <button className="absolute right-3 top-1/2 transform -translate-y-1/2">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    className="h-5 w-5 text-gray-500"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
                   >
-                    <NavLink
-                      className={({ isActive }) =>
-                        isActive
-                          ? "font-medium  p-1 text-black bg-white border-b-2 border-black"
-                          : "font-medium text-base hover:text-gray-500"
-                      }
-                      to={link.to}
-                    >
-                      {link.name}
-                    </NavLink>
-                  </li>
-                )
-            )}
-          </ul>
-        </nav>
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
+                    />
+                  </svg>
+                </button>
+              </div>
+            </div>
 
-        <div className="flex space-x-4 ">
-          <Link className="hidden lg:block" to="/account">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-              strokeWidth={1.5}
-              stroke="currentColor"
-              className="w-6 h-6 cursor-pointer"
+            <Link
+              to="/"
+              className="lg:absolute lg:left-1/2 lg:transform lg:-translate-x-1/2"
+              onClick={() => window.scrollTo(0, 0)}
             >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                d="M15.75 6a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0ZM4.501 20.118a7.5 7.5 0 0 1 14.998 0A17.933 17.933 0 0 1 12 21.75c-2.676 0-5.216-.584-7.499-1.632Z"
-              />
-            </svg>
-          </Link>
+              <div className="flex items-center gap-2">
+                <img
+                  src={Bikeshoop}
+                  className="h-16 w-auto"
+                  alt="Estacion Bike"
+                />
+              </div>
+            </Link>
 
-          <div className="relative" onClick={toggleModal}>
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-              strokeWidth={1.5}
-              stroke="currentColor"
-              className="w-6 h-6 cursor-pointer"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 0 0-3 3h15.75m-12.75-3h11.218c1.121-2.3 2.1-4.684 2.924-7.138a60.114 60.114 0 0 0-16.536-1.84M7.5 14.25 5.106 5.272M6 20.25a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0Zm12.75 0a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0Z"
-              />
-            </svg>
+            <div className="flex items-center gap-6 w-full lg:w-1/4 justify-end">
+              <div className="flex items-center gap-2">
+                <Link
+                  to="/register"
+                  className="text-sm font-medium hover:text-blak"
+                  onClick={() => window.scrollTo(0, 0)}
+                >
+                  CREAR CUENTA
+                </Link>
+                <span className="text-gray-300">|</span>
+                <Link
+                  to="/login"
+                  className="text-sm font-medium hover:text-black"
+                  onClick={() => window.scrollTo(0, 0)}
+                >
+                  INICIAR SESIÓN
+                </Link>
+              </div>
 
-            <span className="absolute top-0 right-0 inline-flex items-center justify-center px-2 py-1 text-xs font-bold leading-none text-red-100 transform translate-x-1/2 -translate-y-1/2 bg-red-600 rounded-full">
-              {getTotalcartItems()}
-            </span>
+              <div className="relative" onClick={() => setIsOpen(!isOpen)}>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  strokeWidth={1.5}
+                  stroke="currentColor"
+                  className="w-6 h-6 cursor-pointer"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 0 0-3 3h15.75m-12.75-3h11.218c1.121-2.3 2.1-4.684 2.924-7.138a60.114 60.114 0 0 0-16.536-1.84M7.5 14.25 5.106 5.272M6 20.25a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0Zm12.75 0a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0Z"
+                  />
+                </svg>
+                {getTotalcartItems() > 0 && (
+                  <span className="absolute -top-2 -right-2 bg-blue-900 text-white text-xs font-bold rounded-full h-5 w-5 flex items-center justify-center">
+                    {getTotalcartItems()}
+                  </span>
+                )}
+              </div>
+            </div>
           </div>
-          <CartModal open={isOpen} setOpen={setIsOpen} />
+
+          {/* Navigation */}
+          <nav className="mt-6">
+            {/* Mobile Menu Button */}
+            <div className="lg:hidden">
+              <button
+                onClick={() => setMenuOpen(!menuOpen)}
+                className="text-gray-700 hover:text-blak focus:outline-none"
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  className="h-6 w-6"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  {menuOpen ? (
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M6 18L18 6M6 6l12 12"
+                    />
+                  ) : (
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M4 6h16M4 12h16M4 18h16"
+                    />
+                  )}
+                </svg>
+              </button>
+            </div>
+
+            {/* Desktop Navigation */}
+            <div className={`lg:block ${menuOpen ? "block" : "hidden"}`}>
+              <div className="bg-black rounded-lg">
+                <ul className="flex flex-col lg:flex-row items-center justify-center space-y-2 lg:space-y-0 lg:space-x-8 py-4">
+                  {Navlink.map((link) => (
+                    <li key={link.name}>
+                      <NavLink
+                        to={link.to}
+                        className={({ isActive }) =>
+                          `text-white text-sm font-medium hover:text-gray-300 transition-colors ${
+                            isActive ? "border-b-2 border-white pb-1" : ""
+                          }`
+                        }
+                        onClick={() => {
+                          setMenuOpen(false);
+                          window.scrollTo(0, 0);
+                        }}
+                      >
+                        {link.name}
+                      </NavLink>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </div>
+          </nav>
         </div>
       </header>
-    </>
+
+      <CartModal open={isOpen} setOpen={setIsOpen} />
+    </div>
   );
 };

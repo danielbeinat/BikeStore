@@ -1,18 +1,18 @@
 import { Routes, Route } from "react-router-dom";
 import { Home } from "./Pages/Home";
 import { Navbar } from "./Components/Navbar/Navbar";
-import { Account } from "./Pages/Account";
+import { Login } from "./Pages/Account/Login";
+import { Register } from "./Pages/Account/Register";
 import { Cart } from "./Pages/Cart";
 import { Footer } from "./Components/Footer/Footer";
 import { Category } from "./Pages/Category";
 import { Product } from "./Pages/Product";
-import { HeaderPromo } from "./Components/HeaderPromo/HeaderPromo";
 import { ChatBox } from "./Components/ChatBox/ChatBox";
 import { Checkout } from "./Components/Checkout/Checkout";
+import { NewLetter } from "./Components/NewsLetter/NewLetter";
 export const App: React.FC = () => {
   return (
     <>
-      <HeaderPromo />
       <Navbar />
       <Routes>
         <Route path="/" element={<Home />} />
@@ -25,7 +25,8 @@ export const App: React.FC = () => {
           element={<Category Category="Indumentaria" />}
         />
         <Route path="bicicletas" element={<Category Category="Bicicletas" />} />
-        <Route path="/account" element={<Account />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/register" element={<Register />} />
         <Route path="/cart" element={<Cart />} />
 
         <Route path="/product" element={<Product />}>
@@ -36,6 +37,8 @@ export const App: React.FC = () => {
       </Routes>
 
       <ChatBox />
+
+      <NewLetter />
 
       <Footer />
     </>

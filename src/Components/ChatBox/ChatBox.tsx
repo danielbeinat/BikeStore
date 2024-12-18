@@ -1,174 +1,200 @@
-import { FormEvent, useState } from "react";
+import React, { FormEvent, useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 
 export const ChatBox: React.FC = () => {
-  const [Show, setShow] = useState<boolean>(false);
+  const [show, setShow] = useState<boolean>(false);
   const [enviado, setEnviado] = useState<boolean>(false);
 
-  const HandlerSubmit = (e: FormEvent) => {
+  const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
-
     setEnviado(true);
   };
 
   return (
     <>
-      <div
-        onClick={() => setShow(!Show)}
-        className="fixed hidden lg:flex items bg-gray-800 text-white p-4 center bottom-3 border border-white cursor-pointer z-50 hover:scale-105 duration-500 right-5 rounded-full shadow-2xl"
+      <motion.div
+        initial={{ scale: 0.8, opacity: 0 }}
+        animate={{ scale: 1, opacity: 1 }}
+        transition={{ duration: 0.3 }}
+        onClick={() => setShow(!show)}
+        className="fixed bottom-6 right-6 bg-black text-white p-4 rounded-full shadow-lg cursor-pointer z-50  transition-colors duration-300"
       >
-        {Show ? (
+        {show ? (
           <svg
             xmlns="http://www.w3.org/2000/svg"
+            className="h-6 w-6"
             fill="none"
             viewBox="0 0 24 24"
-            strokeWidth={1.5}
             stroke="currentColor"
-            className="w-7 h-7"
           >
             <path
               strokeLinecap="round"
               strokeLinejoin="round"
+              strokeWidth={2}
               d="M6 18L18 6M6 6l12 12"
             />
           </svg>
         ) : (
           <svg
             xmlns="http://www.w3.org/2000/svg"
+            className="h-6 w-6"
             fill="none"
             viewBox="0 0 24 24"
-            strokeWidth={1.5}
             stroke="currentColor"
-            className="w-7 h-7"
           >
             <path
               strokeLinecap="round"
               strokeLinejoin="round"
-              d="M21.75 6.75v10.5a2.25 2.25 0 0 1-2.25 2.25h-15a2.25 2.25 0 0 1-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0 0 19.5 4.5h-15a2.25 2.25 0 0 0-2.25 2.25m19.5 0v.243a2.25 2.25 0 0 1-1.07 1.916l-7.5 4.615a2.25 2.25 0 0 1-2.36 0L3.32 8.91a2.25 2.25 0 0 1-1.07-1.916V6.75"
+              strokeWidth={2}
+              d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z"
             />
           </svg>
         )}
-      </div>
+      </motion.div>
 
-      {Show && (
-        <div className="fixed font-poppins flex flex-col bg-gray-800 text-white py-2 bottom-[75px] cursor-pointer z-50 w-1/3 right-4  rounded shadow-2xl">
-          <header className="flex w-full justify-between items-center py-2 pb-5 px-4 border-b border-blue-500  ">
-            <h1 className="text-sm font-bold">
-              Será un placer responder tus dudas
-            </h1>
-            <div className="cursor-pointer" onClick={() => setShow(!Show)}>
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 24 24"
-                strokeWidth={1.5}
-                stroke="currentColor"
-                className="w-6 h-6"
+      <AnimatePresence>
+        {show && (
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: 20 }}
+            transition={{ duration: 0.3 }}
+            className="fixed bottom-24 right-6 w-96 bg-white rounded-lg shadow-2xl overflow-hidden z-50"
+          >
+            <div className="bg-black text-white p-4 flex justify-between items-center">
+              <h2 className="text-lg font-semibold">Chat con nosotros</h2>
+              <button
+                onClick={() => setShow(false)}
+                className="text-white hover:text-gray-200 transition-colors"
               >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  d="M6 18 18 6M6 6l12 12"
-                />
-              </svg>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  className="h-6 w-6"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M6 18L18 6M6 6l12 12"
+                  />
+                </svg>
+              </button>
             </div>
-          </header>
-          <div>
-            {enviado ? ( // Mostrar el icono de enviado si el estado es true
-              <div className="flex justify-center flex-col gap-2 h-96 items-center text-green-500 text-lg">
-                <div className="rounded-full border border-green-500 p-3">
+            <div className="p-6">
+              {enviado ? (
+                <div className="flex flex-col items-center justify-center h-64 text-green-600">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
+                    className="h-16 w-16 mb-4"
                     fill="none"
                     viewBox="0 0 24 24"
-                    strokeWidth={2}
                     stroke="currentColor"
-                    className="w-8 h-8"
                   >
                     <path
                       strokeLinecap="round"
                       strokeLinejoin="round"
-                      d="M5 13l4 4L19 7"
+                      strokeWidth={2}
+                      d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
                     />
                   </svg>
+                  <p className="text-xl font-semibold">Mensaje Enviado</p>
+                  <p className="text-sm text-gray-600 mt-2">
+                    Gracias por contactarnos
+                  </p>
                 </div>
-                <h1>Mensaje Enviado</h1>
-              </div>
-            ) : (
-              <form
-                onSubmit={HandlerSubmit}
-                className="p-4 py-5 flex gap-5 flex-col"
-                action=""
-              >
-                <fieldset className="flex flex-col gap-2">
-                  <label className="text-xs" htmlFor="nombre">
-                    nombre *
-                  </label>
-                  <input
-                    className="bg-transparent text-sm outline-none border-blue-500 text-white "
-                    type="text"
-                    name="nombre"
-                    id="nombre"
-                    required
-                  />
-                </fieldset>
-
-                <fieldset className="flex flex-col gap-2">
-                  <label className="text-xs" htmlFor="Email">
-                    Email *
-                  </label>
-                  <input
-                    className="bg-transparent text-sm outline-none border-blue-500 text-white"
-                    type="text"
-                    name="Email"
-                    id="Email"
-                    required
-                  />
-                </fieldset>
-
-                <fieldset className="flex flex-col gap-2">
-                  <label className="text-xs" htmlFor="consulta">
-                    Tu mensaje *
-                  </label>
-                  <textarea
-                    className="bg-transparent text-sm outline-none border-blue-500 text-white resize-none"
-                    name="consulta"
-                    id="consulta"
-                    required
-                  ></textarea>
-                </fieldset>
-
-                <fieldset className="flex items-center gap-2">
-                  <input type="checkbox" name="acepto" id="acepto" required />
-                  <label className="text-xs" htmlFor="acepto">
-                    Acepto los términos y condiciones
-                  </label>
-                </fieldset>
-                <div className="flex justify-center items-center">
-                  <button
-                    className="text-sm w-16 flex items-center justify-center h-16 bg-blue-500 px-4 py-1 rounded-full shadow-lg hover:bg-blue-600"
-                    type="submit"
-                  >
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                      strokeWidth={1.5}
-                      stroke="currentColor"
-                      className="w-8 h-8"
+              ) : (
+                <form onSubmit={handleSubmit} className="space-y-4">
+                  <div>
+                    <label
+                      htmlFor="nombre"
+                      className="block text-sm font-medium text-gray-700 mb-1"
                     >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        d="M6 12 3.269 3.125A59.769 59.769 0 0 1 21.485 12 59.768 59.768 0 0 1 3.27 20.875L5.999 12Zm0 0h7.5"
-                      />
-                    </svg>
-                  </button>
-                </div>
-              </form>
-            )}
-          </div>
-        </div>
-      )}
+                      Nombre *
+                    </label>
+                    <input
+                      type="text"
+                      id="nombre"
+                      name="nombre"
+                      required
+                      className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                    />
+                  </div>
+                  <div>
+                    <label
+                      htmlFor="email"
+                      className="block text-sm font-medium text-gray-700 mb-1"
+                    >
+                      Email *
+                    </label>
+                    <input
+                      type="email"
+                      id="email"
+                      name="email"
+                      required
+                      className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                    />
+                  </div>
+                  <div>
+                    <label
+                      htmlFor="mensaje"
+                      className="block text-sm font-medium text-gray-700 mb-1"
+                    >
+                      Tu mensaje *
+                    </label>
+                    <textarea
+                      id="mensaje"
+                      name="mensaje"
+                      rows={4}
+                      required
+                      className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                    ></textarea>
+                  </div>
+                  <div className="flex items-center">
+                    <input
+                      type="checkbox"
+                      id="acepto"
+                      name="acepto"
+                      required
+                      className="h-4 w-4 text-black focus:ring-black border-gray-300 rounded"
+                    />
+                    <label
+                      htmlFor="acepto"
+                      className="ml-2 block text-sm text-gray-700"
+                    >
+                      Acepto los términos y condiciones
+                    </label>
+                  </div>
+                  <div className="flex justify-center">
+                    <button
+                      type="submit"
+                      className="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-black hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition-colors duration-300"
+                    >
+                      Enviar mensaje
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        className="h-5 w-5 ml-2"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke="currentColor"
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth={2}
+                          d="M14 5l7 7m0 0l-7 7m7-7H3"
+                        />
+                      </svg>
+                    </button>
+                  </div>
+                </form>
+              )}
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </>
   );
 };

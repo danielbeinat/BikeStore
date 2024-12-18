@@ -16,7 +16,6 @@ interface Product {
   type?: any;
 }
 
-// El context se crea con `| null` en el tipo, para reflejar con exactitud el valor predeterminado.
 export const Category: React.FC<propsproduct> = (props) => {
   const { AllProducts } = useContext(Context) as ContextValue;
 

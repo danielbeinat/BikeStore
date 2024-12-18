@@ -1,119 +1,114 @@
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  faFacebookSquare,
-  faSquareInstagram,
-  faSquareXTwitter,
-  faLinkedin,
-} from "@fortawesome/free-brands-svg-icons";
-
-import {
-  faPhone,
-  faEnvelope,
-  faLocationDot,
-} from "@fortawesome/free-solid-svg-icons";
-
 import { Link } from "react-router-dom";
+import {
+  Facebook,
+  Instagram,
+  Twitter,
+  Linkedin,
+  Phone,
+  Mail,
+  MapPin,
+} from "lucide-react";
 
-export const Footer: React.FC = () => {
+export function Footer() {
+  const navigation = [
+    { name: "Inicio", href: "/" },
+    { name: "Bicicletas", href: "/bicicletas" },
+    { name: "Accesorios", href: "/accesorios" },
+    { name: "Indumentaria", href: "/indumentaria" },
+  ];
+
+  const info = [
+    { name: "Cambios y devoluciones", href: "#" },
+    { name: "Preguntas frecuentes", href: "#" },
+    { name: "Términos y condiciones", href: "#" },
+  ];
+
+  const contact = [
+    { icon: Phone, text: "+549 11 1234 5678" },
+    { icon: Mail, text: "ventas@bikestore.com.ar" },
+    {
+      icon: MapPin,
+      text: "BikeStore BA Av. Corrientes 1234, Ciudad Autónoma de Buenos Aires, CABA, Argentina",
+    },
+  ];
+
+  const social = [
+    { icon: Facebook, href: "#" },
+    { icon: Instagram, href: "#" },
+    { icon: Twitter, href: "#" },
+    { icon: Linkedin, href: "#" },
+  ];
+
   return (
-    <>
-      <footer className="font-poppins">
-        <div className="grid grid-cols-1 gap-4 md:grid-cols-4 lg:grid-cols-4 border  lg:justify-items-center px-10 items-start lg:place-content-center py-16 text-sm lg:text-base">
+    <footer className="bg-background font-poppins text-foreground border-t ">
+      <div className="container mx-auto px-4 py-12">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
           <div>
-            <h1 className="font-bold pb-4">NAVEGACIÓN</h1>
-            <ul className="flex flex-col gap-2">
-              <li className="hover:text-gray-500 hover:underline">
-                <Link to={"/"}>Inicio</Link>
-              </li>
-              <li className="hover:text-gray-500 hover:underline">
-                <Link to={"/bicicletas"}>Bicicletas</Link>
-              </li>
-              <li className="hover:text-gray-500 hover:underline">
-                <Link to={"/accesorios"}>Accesorios</Link>
-              </li>
-              <li className="hover:text-gray-500 hover:underline">
-                <Link to={"/indumentaria"}>Indumentaria</Link>
-              </li>
+            <h2 className="text-lg font-bold mb-4">NAVEGACIÓN</h2>
+            <ul className="space-y-2">
+              {navigation.map((item) => (
+                <li
+                  key={item.name}
+                  className="hover:text-primary transition-colors duration-200"
+                >
+                  <Link to={item.href}>{item.name}</Link>
+                </li>
+              ))}
             </ul>
           </div>
           <div>
-            <h1 className="font-bold pb-4">INFO</h1>
-            <ul className="flex flex-col gap-2 ">
-              <li className="hover:text-gray-500 hover:underline">
-                <a href="">Cambios y devoluciones</a>
-              </li>
-              <li className="hover:text-gray-500 hover:underline">
-                <a href="">Preguntas frecuentes</a>
-              </li>
-              <li className="hover:text-gray-500 hover:underline">
-                <a href="">Términos y condiciones</a>
-              </li>
+            <h2 className="text-lg font-bold mb-4">INFO</h2>
+            <ul className="space-y-2">
+              {info.map((item) => (
+                <li
+                  key={item.name}
+                  className="hover:text-primary transition-colors duration-200"
+                >
+                  <Link to={item.href}>{item.name}</Link>
+                </li>
+              ))}
             </ul>
           </div>
           <div>
-            <h1 className="font-bold pb-4">Contactános</h1>
-            <ul className="flex flex-col gap-2 ">
-              <li className="flex gap-1 align-center items-center">
-                <FontAwesomeIcon icon={faPhone} />
-                <span className=" text-sm">+549 11 1234 5678</span>
-              </li>
-              <li className="flex gap-1 align-center items-center">
-                <FontAwesomeIcon icon={faEnvelope} />
-                <span className=" text-sm ">ventas@bikestore.com.ar</span>
-              </li>
-              <li className="flex gap-1 align-center">
-                <FontAwesomeIcon icon={faLocationDot} />
-
-                <address className="text-sm">
-                  BikeStore BA Av. Corrientes 1234, Ciudad Autónoma de Buenos
-                  Aires, CABA, Argentina
-                </address>
-              </li>
+            <h2 className="text-lg font-bold mb-4">Contáctanos</h2>
+            <ul className="space-y-2">
+              {contact.map((item, index) => (
+                <li key={index} className="flex items-center space-x-2">
+                  <item.icon className="h-5 w-5 text-primary" />
+                  <span className="text-sm">{item.text}</span>
+                </li>
+              ))}
             </ul>
           </div>
           <div>
-            <h1 className="font-bold pb-4">REDES SOCIALES</h1>
-
-            <ul className="flex gap-2">
-              <li>
-                <a href="">
-                  <FontAwesomeIcon
-                    className=" text-3xl  rounded"
-                    icon={faFacebookSquare}
-                  />
+            <h2 className="text-lg font-bold mb-4">REDES SOCIALES</h2>
+            <div className="flex space-x-4">
+              {social.map((item, index) => (
+                <a
+                  key={index}
+                  href={item.href}
+                  className="text-foreground hover:text-primary transition-colors duration-200"
+                >
+                  <item.icon className="h-6 w-6" />
                 </a>
-              </li>
-              <li>
-                <a href="">
-                  <FontAwesomeIcon
-                    className="text-3xl rounded"
-                    icon={faSquareInstagram}
-                  />
-                </a>
-              </li>
-              <li>
-                <a href="">
-                  <FontAwesomeIcon
-                    className="text-3xl rounded"
-                    icon={faSquareXTwitter}
-                  />
-                </a>
-              </li>
-              <li>
-                <a href="">
-                  <FontAwesomeIcon className="text-3xl" icon={faLinkedin} />
-                </a>
-              </li>
-            </ul>
+              ))}
+            </div>
           </div>
         </div>
-
-        <div className="flex flex-col lg:flex-row gap-2 justify-between lg:items-center px-10 py-5 bg-gray-800  text-white text-xs lg:xs">
-          <p>COPYRIGHT BIKE STORE - 2024. TODOS LOS DERECHOS RESERVADOS.</p>
-
-          <p>creador por: DanielBeinat</p>
+      </div>
+      <div className="border-t">
+        <div className="container mx-auto px-4 py-6 flex flex-col sm:flex-row justify-between items-center">
+          <p className="text-sm text-muted-foreground">
+            COPYRIGHT BIKE STORE - {new Date().getFullYear()}. TODOS LOS
+            DERECHOS RESERVADOS.
+          </p>
+          <div className="flex items-center space-x-4 mt-4 sm:mt-0">
+            <p className="text-sm text-muted-foreground">
+              Creado por: DanielBeinat
+            </p>
+          </div>
         </div>
-      </footer>
-    </>
+      </div>
+    </footer>
   );
-};
+}

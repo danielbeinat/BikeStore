@@ -1,9 +1,10 @@
 import { useState, useContext, useEffect } from "react";
 import { NavLink, Link } from "react-router-dom";
+import { Search } from "./Search/Search";
+
 import { Context, ContextValue } from "../../Context/Context";
 import { CartModal } from "../CartModal/CartModal";
 import Bikeshoop from "../../assets/Bikeshoop.png";
-
 export const Navbar: React.FC = () => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const [menuOpen, setMenuOpen] = useState<boolean>(false);
@@ -51,29 +52,7 @@ export const Navbar: React.FC = () => {
         <div className="container mx-auto px-4 py-4">
           <div className="flex flex-col lg:flex-row items-center justify-between gap-4">
             <div className="w-full lg:w-1/4">
-              <div className="relative">
-                <input
-                  type="text"
-                  placeholder="Buscar"
-                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-none"
-                />
-                <button className="absolute right-3 top-1/2 transform -translate-y-1/2">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    className="h-5 w-5 text-gray-500"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={2}
-                      d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
-                    />
-                  </svg>
-                </button>
-              </div>
+              <Search />
             </div>
 
             <Link

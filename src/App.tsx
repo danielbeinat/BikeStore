@@ -10,6 +10,8 @@ import { Product } from "./Pages/Product";
 import { ChatBox } from "./Components/ChatBox/ChatBox";
 import { Checkout } from "./Components/Checkout/Checkout";
 import { NewLetter } from "./Components/NewsLetter/NewLetter";
+import { SearchResults } from "./Pages/SearchResults";
+
 export const App: React.FC = () => {
   return (
     <>
@@ -24,6 +26,8 @@ export const App: React.FC = () => {
           path="/indumentaria"
           element={<Category Category="Indumentaria" />}
         />
+        <Route path="/search/:query" element={<SearchResults />} />
+
         <Route path="bicicletas" element={<Category Category="Bicicletas" />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />

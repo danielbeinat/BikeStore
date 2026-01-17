@@ -1,10 +1,12 @@
 import { useContext, useState } from "react";
+import { Minus, Plus } from "lucide-react";
 import { RelatedProducts } from "../RelatedProducts/RelatedProducts";
 import { Context, ContextValue } from "../../Context/Context";
 import { CartModal } from "../CartModal/CartModal";
+import { Heart } from "lucide-react";
 
 import { ProductSlider } from "./Slider/ProductSlider.jsx";
-import { SecurityInformation } from "./SecurityInformation/SecurityInformation.jsx";
+import { SecurityInformation } from "./SecurityInformation/SecurityInformation";
 
 interface propsitems {
   product: {
@@ -20,20 +22,30 @@ interface propsitems {
 
 export const ProductDisplay: React.FC<propsitems> = (props) => {
   const { product } = props;
-  const [isOpen, setIsOpen] = useState<boolean>(false);
 
   const toggleModal = () => {
-    setIsOpen(!isOpen);
+    setCartModalOpen(!cartModalOpen);
   };
 
   const defaultSize =
     product.sizes && product.sizes.length > 0 ? product.sizes[0] : "";
   const [selectedSize, setSelectedSize] = useState(defaultSize);
+  const [quantity, setQuantity] = useState(1);
 
-  const { addToCart } = useContext(Context) as ContextValue;
+  const { addToCart, addToWishlist, removeFromWishlist, isInWishlist, cartModalOpen, setCartModalOpen } = useContext(
+    Context
+  ) as ContextValue;
 
   const handleSizeChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setSelectedSize(event.target.value);
+  };
+
+  const incrementQuantity = () => {
+    setQuantity(prev => prev + 1);
+  };
+
+  const decrementQuantity = () => {
+    setQuantity(prev => prev > 1 ? prev - 1 : 1);
   };
 
   const installmentPrice = (product.price / 6)
@@ -70,10 +82,7 @@ export const ProductDisplay: React.FC<propsitems> = (props) => {
                 </svg>
 
                 <p className="text-base text-gray-500 font-light">
-                  {`6 cuotas fijas de $${installmentPrice.toLocaleString(
-                    "es-MX",
-                    { style: "currency", currency: "MXN" }
-                  )}`}
+                  {`6 cuotas fijas de $${installmentPrice}`}
                 </p>
               </div>
             </div>
@@ -101,16 +110,62 @@ export const ProductDisplay: React.FC<propsitems> = (props) => {
                 </div>
               </div>
             )}
-            <button
-              onClick={() => {
-                addToCart(product.id); // Añadir el producto al carrito
-                toggleModal(); // Abrir el modal del carrito
-              }}
-              className="bg-black text-white px-5 py-2 rounded-lg mt-5"
-            >
-              Agregar al Carrito
-            </button>
-            <CartModal open={isOpen} setOpen={setIsOpen} />
+
+            {/* Quantity Selector */}
+            <div className="flex gap-4 flex-col">
+              <h1>Cantidad</h1>
+              <div className="flex items-center gap-3">
+                <button
+                  onClick={decrementQuantity}
+                  className="w-10 h-10 rounded-lg border-2 border-gray-300 flex items-center justify-center hover:border-gray-400 hover:bg-gray-50 transition-colors"
+                  aria-label="Disminuir cantidad"
+                >
+                  <Minus className="w-4 h-4" />
+                </button>
+                <span className="w-12 text-center font-semibold text-lg">{quantity}</span>
+                <button
+                  onClick={incrementQuantity}
+                  className="w-10 h-10 rounded-lg border-2 border-gray-300 flex items-center justify-center hover:border-gray-400 hover:bg-gray-50 transition-colors"
+                  aria-label="Aumentar cantidad"
+                >
+                  <Plus className="w-4 h-4" />
+                </button>
+              </div>
+            </div>
+
+            <div className="flex gap-3 mt-5">
+              <button
+                onClick={() => {
+                  addToCart(product.id, quantity); // Añadir el producto al carrito con cantidad
+                  toggleModal(); // Abrir el modal del carrito
+                }}
+                className="flex-1 bg-black text-white px-5 py-2 rounded-lg hover:bg-gray-800 transition-colors"
+              >
+                Agregar al Carrito
+              </button>
+              <button
+                onClick={() => {
+                  if (isInWishlist(product.id)) {
+                    removeFromWishlist(product.id);
+                  } else {
+                    addToWishlist(product.id);
+                  }
+                }}
+                className={`px-5 py-2 rounded-lg border-2 transition-colors ${
+                  isInWishlist(product.id)
+                    ? "border-red-500 bg-red-50 text-red-600"
+                    : "border-gray-300 hover:border-red-500 hover:text-red-500"
+                }`}
+                aria-label="Agregar a favoritos"
+              >
+                <Heart
+                  className={`w-5 h-5 ${
+                    isInWishlist(product.id) ? "fill-red-500" : ""
+                  }`}
+                />
+              </button>
+            </div>
+            <CartModal open={cartModalOpen} setOpen={setCartModalOpen} />
 
             <SecurityInformation />
           </div>

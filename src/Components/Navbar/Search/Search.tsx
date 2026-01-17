@@ -1,5 +1,6 @@
-import { useState, useContext } from "react";
+import { useState, useContext, useRef, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import { Search as SearchIcon } from "lucide-react";
 import { Context, ContextValue } from "../../../Context/Context";
 
 export const Search: React.FC = () => {
@@ -7,6 +8,7 @@ export const Search: React.FC = () => {
   const [showResults, setShowResults] = useState(false);
   const { AllProducts } = useContext(Context) as ContextValue;
   const navigate = useNavigate();
+  const searchRef = useRef<HTMLDivElement>(null);
 
   const filteredProducts = AllProducts.filter((product) =>
     product.name.toLowerCase().includes(searchTerm.toLowerCase())
@@ -20,77 +22,80 @@ export const Search: React.FC = () => {
     }
   };
 
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (searchRef.current && !searchRef.current.contains(event.target as Node)) {
+        setShowResults(false);
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, []);
+
   return (
-    <div className="relative">
-      <input
-        type="text"
-        placeholder="Buscar productos..."
-        value={searchTerm}
-        onChange={(e) => {
-          setSearchTerm(e.target.value);
-          setShowResults(e.target.value.length > 0);
-        }}
-        onKeyPress={(e) => {
-          if (e.key === "Enter") {
-            handleSearch();
-          }
-        }}
-        className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-none"
-        aria-label="Buscar productos"
-      />
-      <button
-        className="absolute right-3 top-1/2 transform -translate-y-1/2"
-        onClick={handleSearch}
-        aria-label="Realizar búsqueda"
-      >
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          className="h-5 w-5 text-gray-500"
-          fill="none"
-          viewBox="0 0 24 24"
-          stroke="currentColor"
-        >
-          <path
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            strokeWidth={2}
-            d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
-          />
-        </svg>
-      </button>
+    <div ref={searchRef} className="relative">
+      <div className="relative flex items-center">
+        <input
+          type="text"
+          placeholder="Search"
+          value={searchTerm}
+          onChange={(e) => {
+            setSearchTerm(e.target.value);
+            setShowResults(e.target.value.length > 0);
+          }}
+          onKeyPress={(e) => {
+            if (e.key === "Enter") {
+              handleSearch();
+            }
+          }}
+          onFocus={() => {
+            if (searchTerm.length > 0) {
+              setShowResults(true);
+            }
+          }}
+          className="w-full pl-10 pr-4 py-2 bg-white text-gray-900 placeholder-gray-400 border-0 rounded-md focus:outline-none focus:ring-0 text-sm"
+          aria-label="Buscar productos"
+        />
+        <div className="absolute left-3 pointer-events-none">
+          <SearchIcon className="h-4 w-4 text-gray-400" />
+        </div>
+      </div>
 
       {showResults && searchTerm && (
-        <div className="absolute z-10 w-full mt-1 bg-white border border-gray-300 rounded-lg shadow-lg">
+        <div className="absolute z-50 w-full mt-1 bg-white border border-gray-200 rounded-md shadow-lg">
           {filteredProducts.length > 0 ? (
-            filteredProducts.map((product) => (
-              <Link
-                key={product.id}
-                to={`/product/${product.id}`}
-                className="block px-4 py-2 hover:bg-gray-100"
-                onClick={() => {
-                  setShowResults(false);
-                  setSearchTerm("");
-                }}
-              >
-                <div className="flex items-center">
+            <div className="py-1">
+              {filteredProducts.map((product) => (
+                <Link
+                  key={product.id}
+                  to={`/product/${product.id}`}
+                  className="flex items-center gap-3 px-4 py-2 hover:bg-gray-50 transition-colors"
+                  onClick={() => {
+                    setShowResults(false);
+                    setSearchTerm("");
+                  }}
+                >
                   <img
                     src={product.image}
                     alt={product.name}
-                    className="w-10 h-10 object-cover mr-3"
+                    className="w-10 h-10 object-cover rounded"
                   />
-                  <div>
-                    <p className="text-sm font-medium">{product.name}</p>
+                  <div className="flex-1 min-w-0">
+                    <p className="text-sm font-medium text-gray-900 truncate">
+                      {product.name}
+                    </p>
                     <p className="text-xs text-gray-500">
                       ${product.price.toLocaleString()}
                     </p>
                   </div>
-                </div>
-              </Link>
-            ))
+                </Link>
+              ))}
+            </div>
           ) : (
-            <p className="px-4 py-2 text-sm text-gray-500">
+            <div className="px-4 py-3 text-sm text-gray-500">
               No se encontraron productos
-            </p>
+            </div>
           )}
         </div>
       )}

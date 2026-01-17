@@ -1,15 +1,29 @@
 import { useContext } from "react";
-import { Context } from "../Context/Context.jsx";
-import { useParams } from "react-router-dom";
+import { Context, ContextValue } from "../Context/Context";
+import { useParams, Navigate } from "react-router-dom";
 import { Breadcrumbs } from "../Components/breadcrumbs/Breadcrumbs";
 import { ProductDisplay } from "../Components/ProductDisplay/ProductDisplay";
+import { sanitizeProductId } from "../utils/sanitization";
+import { Product } from "../assets/AllProducts/AllProducts";
 
-export const Product: React.FC = () => {
-  const { AllProducts } = useContext<any>(Context);
+export const ProductPage: React.FC = () => {
+  const { AllProducts } = useContext(Context) as ContextValue;
+  const { productId } = useParams<{ productId: string }>();
 
-  const { productId } = useParams();
+  // Sanitize and validate product ID
+  const sanitizedId = sanitizeProductId(productId);
 
-  const product = AllProducts.find((e: any) => e.id === Number(productId));
+  if (!sanitizedId) {
+    // Invalid product ID - redirect to home or show 404
+    return <Navigate to="/" replace />;
+  }
+
+  const product = AllProducts.find((p: Product) => p.id === sanitizedId);
+
+  if (!product) {
+    // Product not found - redirect to home or show 404
+    return <Navigate to="/" replace />;
+  }
 
   return (
     <>
@@ -18,3 +32,6 @@ export const Product: React.FC = () => {
     </>
   );
 };
+
+// Export with original name for backward compatibility
+export const Product = ProductPage;

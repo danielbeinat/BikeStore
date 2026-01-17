@@ -30,9 +30,10 @@ export const Login = () => {
   const onSubmit = async (data: LoginFormValues) => {
     try {
       setIsLoading(true);
+      // TODO: Implement actual API call
       // Simular llamada a API
       await new Promise((resolve) => setTimeout(resolve, 1000));
-      console.log("Form data:", data);
+      // TODO: Handle authentication response and store token securely
       toast.success("¡Inicio de sesión exitoso!");
     } catch (error) {
       toast.error("Error al iniciar sesión");

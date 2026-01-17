@@ -1,6 +1,6 @@
 import { Fragment } from "react";
 import { Dialog, Transition } from "@headlessui/react";
-import { XMarkIcon } from "@heroicons/react/24/outline";
+import { X } from "lucide-react";
 import { Context, ContextValue } from "../../Context/Context";
 import { useContext } from "react";
 
@@ -68,7 +68,7 @@ export const CartModal: React.FC<propstate> = ({ open, setOpen }) => {
                           >
                             <span className="absolute -inset-0.5" />
                             <span className="sr-only">Close panel</span>
-                            <XMarkIcon className="h-6 w-6" aria-hidden="true" />
+                            <X className="h-6 w-6" aria-hidden="true" />
                           </button>
                         </div>
                       </div>
@@ -148,7 +148,10 @@ export const CartModal: React.FC<propstate> = ({ open, setOpen }) => {
                         <Link
                           to="/cart"
                           className="flex items-center justify-center rounded-md border border-transparent bg-black px-6 py-3 text-base font-medium text-white shadow-sm "
-                          onClick={() => setOpen(false)}
+                          onClick={() => {
+                            setOpen(false);
+                            window.scrollTo(0, 0);
+                          }}
                         >
                           Finalizar Compra
                         </Link>

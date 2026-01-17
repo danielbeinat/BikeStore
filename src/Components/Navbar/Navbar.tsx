@@ -1,16 +1,29 @@
-import { useState, useContext, useEffect } from "react";
+import { useState, useContext } from "react";
 import { NavLink, Link } from "react-router-dom";
+import { motion } from "framer-motion";
 import { Search } from "./Search/Search";
-
+import {
+  User,
+  Heart,
+  ShoppingCart,
+  Menu,
+  X,
+  Package,
+  RotateCcw,
+  Truck,
+  Wallet,
+} from "lucide-react";
 import { Context, ContextValue } from "../../Context/Context";
 import { CartModal } from "../CartModal/CartModal";
+import { WishlistModal } from "../WishlistModal/WishlistModal";
 import Bikeshoop from "../../assets/Bikeshoop.png";
+
 export const Navbar: React.FC = () => {
-  const [isOpen, setIsOpen] = useState<boolean>(false);
+  const [isWishlistOpen, setIsWishlistOpen] = useState<boolean>(false);
   const [menuOpen, setMenuOpen] = useState<boolean>(false);
-  const [showBanner, setShowBanner] = useState<boolean>(true);
-  const [lastScrollY, setLastScrollY] = useState<number>(0);
-  const { getTotalcartItems } = useContext(Context) as ContextValue;
+  const { getTotalcartItems, getTotalWishlistItems, cartModalOpen, setCartModalOpen } = useContext(
+    Context
+  ) as ContextValue;
 
   const Navlink = [
     { name: "INICIO", to: "/" },
@@ -20,162 +33,179 @@ export const Navbar: React.FC = () => {
     { name: "INDUMENTARIA", to: "/indumentaria" },
   ];
 
-  useEffect(() => {
-    const handleScroll = () => {
-      const currentScrollY = window.scrollY;
-      // Muestra el banner solo cuando scrollY está en la parte superior (0)
-      setShowBanner(currentScrollY === 0);
-    };
-
-    window.addEventListener("scroll", handleScroll, { passive: true });
-
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
+  const benefits = [
+    { icon: Package, text: "Retiro en tienda en 48hs" },
+    { icon: RotateCcw, text: "Cambios y devoluciones" },
+    { icon: Truck, text: "Envío rápido" },
+    { icon: Wallet, text: "Hasta 12 cuotas sin interés" },
+  ];
 
   return (
-    <div className="fixed top-0 left-0 right-0 z-50 transition-all font-poppins duration-300">
-      <div
-        className={`bg-black text-white py-2 px-4 text-center transition-all duration-300 ${
-          showBanner ? "translate-y-0" : "-translate-y-full"
-        }`}
-      >
-        <p className="text-sm">
-          3 y 6 CUOTAS FIJAS | ENVÍO GRATIS A PARTIR DE $50.000 ⚡
-        </p>
-      </div>
-
-      <header
-        className={`bg-white font-poppins transition-all duration-300 ${
-          showBanner ? "" : "-translate-y-9 shadow-md"
-        }`}
-      >
-        <div className="container mx-auto px-4 py-4">
-          <div className="flex flex-col lg:flex-row items-center justify-between gap-4">
-            <div className="w-full lg:w-1/4">
-              <Search />
-            </div>
-
+    <div className="fixed top-0 left-0 right-0 z-50 bg-white shadow-sm">
+      {/* Piso Superior - Fondo Negro */}
+      <header className="bg-black text-white">
+        <div className="container mx-auto px-4">
+          <div className="flex items-center justify-between gap-4 py-4">
+            {/* Logo - Izquierda */}
             <Link
               to="/"
-              className="lg:absolute lg:left-1/2 lg:transform lg:-translate-x-1/2"
+              className="flex-shrink-0"
               onClick={() => window.scrollTo(0, 0)}
             >
-              <div className="flex items-center gap-2">
-                <img
-                  src={Bikeshoop}
-                  className="h-16 w-auto"
-                  alt="Estacion Bike"
-                />
-              </div>
+              <img src={Bikeshoop} className="h-14 w-auto transition-transform duration-300 hover:scale-105 drop-shadow-sm border border-white/10 rounded-md" alt="BiciShoop" />
             </Link>
 
-            <div className="flex items-center gap-6 w-full lg:w-1/4 justify-end">
-              <div className="flex items-center gap-2">
-                <Link
-                  to="/register"
-                  className="text-sm font-medium hover:text-blak"
+            {/* Nav Links - Centrados */}
+            <nav className="hidden lg:flex items-center gap-4 flex-1 justify-center">
+              {Navlink.map((link) => (
+                <NavLink
+                  key={link.name}
+                  to={link.to}
+                  className={({ isActive }) =>
+                    `text-sm font-bold uppercase transition-colors ${
+                      isActive
+                        ? "text-yellow-400"
+                        : "text-white hover:text-yellow-400"
+                    }`
+                  }
                   onClick={() => window.scrollTo(0, 0)}
                 >
-                  CREAR CUENTA
-                </Link>
-                <span className="text-gray-300">|</span>
-                <Link
-                  to="/login"
-                  className="text-sm font-medium hover:text-black"
-                  onClick={() => window.scrollTo(0, 0)}
-                >
-                  INICIAR SESIÓN
-                </Link>
+                  {link.name}
+                </NavLink>
+              ))}
+            </nav>
+
+            {/* Right Side - Search, Icons */}
+            <div className="flex items-center gap-3 flex-shrink-0">
+              {/* Search Bar - Derecha */}
+              <div className="hidden lg:block w-48">
+                <Search />
               </div>
 
-              <div className="relative" onClick={() => setIsOpen(!isOpen)}>
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  strokeWidth={1.5}
-                  stroke="currentColor"
-                  className="w-6 h-6 cursor-pointer"
+              {/* Icons - Usuario, Favoritos, Carrito */}
+              <div className="flex items-center gap-3">
+                {/* User Icon */}
+                <Link
+                  to="/login"
+                  className="p-2 text-gray-300 hover:text-white transition-colors"
+                  onClick={() => window.scrollTo(0, 0)}
+                  aria-label="Usuario"
                 >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 0 0-3 3h15.75m-12.75-3h11.218c1.121-2.3 2.1-4.684 2.924-7.138a60.114 60.114 0 0 0-16.536-1.84M7.5 14.25 5.106 5.272M6 20.25a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0Zm12.75 0a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0Z"
-                  />
-                </svg>
-                {getTotalcartItems() > 0 && (
-                  <span className="absolute -top-2 -right-2 bg-blue-900 text-white text-xs font-bold rounded-full h-5 w-5 flex items-center justify-center">
-                    {getTotalcartItems()}
-                  </span>
-                )}
+                  <User className="w-5 h-5" />
+                </Link>
+
+                {/* Favorites Icon */}
+                <button
+                  onClick={() => setIsWishlistOpen(!isWishlistOpen)}
+                  className="relative p-2 text-gray-300 hover:text-white transition-colors"
+                  aria-label="Favoritos"
+                >
+                  <Heart className="w-5 h-5" />
+                  {getTotalWishlistItems() > 0 && (
+                    <span className="absolute -top-1 -right-1 bg-yellow-400 text-black text-xs font-bold rounded-full h-4 w-4 flex items-center justify-center min-w-[16px]">
+                      {getTotalWishlistItems()}
+                    </span>
+                  )}
+                </button>
+
+                {/* Cart Icon */}
+                <button
+                  onClick={() => setCartModalOpen(!cartModalOpen)}
+                  className="relative p-2 text-gray-300 hover:text-white transition-colors"
+                  aria-label="Carrito"
+                >
+                  <ShoppingCart className="w-5 h-5" />
+                  {getTotalcartItems() > 0 && (
+                    <span className="absolute -top-1 -right-1 bg-yellow-400 text-black text-xs font-bold rounded-full h-4 w-4 flex items-center justify-center min-w-[16px]">
+                      {getTotalcartItems()}
+                    </span>
+                  )}
+                </button>
+
+                {/* Mobile Menu Button */}
+                <button
+                  onClick={() => setMenuOpen(!menuOpen)}
+                  className="lg:hidden p-2 text-gray-300 hover:text-white transition-colors"
+                  aria-label="Menú"
+                >
+                  {menuOpen ? (
+                    <X className="w-5 h-5" />
+                  ) : (
+                    <Menu className="w-5 h-5" />
+                  )}
+                </button>
               </div>
             </div>
           </div>
 
-          {/* Navigation */}
-          <nav className="mt-6">
-            {/* Mobile Menu Button */}
-            <div className="lg:hidden">
-              <button
-                onClick={() => setMenuOpen(!menuOpen)}
-                className="text-gray-700 hover:text-blak focus:outline-none"
-              >
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  className="h-6 w-6"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                >
-                  {menuOpen ? (
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={2}
-                      d="M6 18L18 6M6 6l12 12"
-                    />
-                  ) : (
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={2}
-                      d="M4 6h16M4 12h16M4 18h16"
-                    />
-                  )}
-                </svg>
-              </button>
+          {/* Mobile Search & Menu */}
+          <div className="lg:hidden pb-4">
+            <div className="mb-4">
+              <Search />
             </div>
-
-            {/* Desktop Navigation */}
-            <div className={`lg:block ${menuOpen ? "block" : "hidden"}`}>
-              <div className="bg-black rounded-lg">
-                <ul className="flex flex-col lg:flex-row items-center justify-center space-y-2 lg:space-y-0 lg:space-x-8 py-4">
-                  {Navlink.map((link) => (
-                    <li key={link.name}>
-                      <NavLink
-                        to={link.to}
-                        className={({ isActive }) =>
-                          `text-white text-sm font-medium hover:text-gray-300 transition-colors ${
-                            isActive ? "border-b-2 border-white pb-1" : ""
-                          }`
-                        }
-                        onClick={() => {
-                          setMenuOpen(false);
-                          window.scrollTo(0, 0);
-                        }}
-                      >
-                        {link.name}
-                      </NavLink>
-                    </li>
-                  ))}
-                </ul>
+            {menuOpen && (
+              <div className="space-y-2">
+                {Navlink.map((link) => (
+                  <NavLink
+                    key={link.name}
+                    to={link.to}
+                    className={({ isActive }) =>
+                      `block px-4 py-2 text-sm font-bold uppercase transition-colors ${
+                        isActive
+                          ? "text-yellow-400"
+                          : "text-white hover:text-yellow-400"
+                      }`
+                    }
+                    onClick={() => {
+                      setMenuOpen(false);
+                      window.scrollTo(0, 0);
+                    }}
+                  >
+                    {link.name}
+                  </NavLink>
+                ))}
               </div>
-            </div>
-          </nav>
+            )}
+          </div>
         </div>
       </header>
 
-      <CartModal open={isOpen} setOpen={setIsOpen} />
+      {/* Piso Inferior - Fondo Blanco - Barra de Beneficios */}
+      <div className="bg-gradient-to-r from-gray-50 to-white border-b border-gray-200/50 backdrop-blur-sm">
+        <div className="container mx-auto px-4">
+          <div className="flex flex-wrap items-center justify-center gap-6 md:gap-8 py-4">
+            {benefits.map((benefit, index) => {
+              const Icon = benefit.icon;
+              return (
+                <motion.div
+                  key={index}
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.5, delay: index * 0.1 }}
+                  className="group flex items-center gap-3 text-gray-700 hover:text-gray-900 transition-all duration-300 cursor-pointer"
+                >
+                  <div className="relative">
+                    {/* Icon background with glassmorphism */}
+                    <div className="w-10 h-10 bg-white/70 backdrop-blur-sm border border-white/50 rounded-xl shadow-sm flex items-center justify-center group-hover:bg-white/90 group-hover:shadow-md group-hover:scale-105 transition-all duration-300">
+                      <Icon className="w-5 h-5 text-black group-hover:scale-110 transition-transform duration-300" />
+                    </div>
+                    {/* Decorative element */}
+                    <div className="absolute -top-1 -right-1 w-3 h-3 bg-gradient-to-br from-[#fbbf24]/20 to-transparent rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                  </div>
+                  <div className="hidden sm:block">
+                    <span className="text-sm font-medium whitespace-nowrap group-hover:text-[#fbbf24] transition-colors duration-300">
+                      {benefit.text}
+                    </span>
+                  </div>
+                </motion.div>
+              );
+            })}
+          </div>
+        </div>
+      </div>
+
+      <CartModal open={cartModalOpen} setOpen={setCartModalOpen} />
+      <WishlistModal open={isWishlistOpen} setOpen={setIsWishlistOpen} />
     </div>
   );
 };

@@ -5,10 +5,17 @@ export interface ContextValue {
   AllProducts: Product[];
   cart: { [key: number]: number };
   setcart: React.Dispatch<React.SetStateAction<{ [key: number]: number }>>;
-  addToCart: (itemId: number) => void;
+  addToCart: (itemId: number, quantity?: number) => void;
   removeFromCart: (itemId: number) => void;
   getTotalCartAmount: () => number;
   getTotalcartItems: () => number;
+  wishlist: number[];
+  addToWishlist: (itemId: number) => void;
+  removeFromWishlist: (itemId: number) => void;
+  isInWishlist: (itemId: number) => boolean;
+  getTotalWishlistItems: () => number;
+  cartModalOpen: boolean;
+  setCartModalOpen: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 export const Context = createContext<ContextValue | null>(null);
@@ -27,14 +34,33 @@ interface ContextProviderProps {
 
 export const ContextProvider: React.FC<ContextProviderProps> = (props) => {
   const [cart, setcart] = useState<{ [key: number]: number }>(getDefaultCart());
-  console.log(cart);
+  const [wishlist, setWishlist] = useState<number[]>([]);
+  const [cartModalOpen, setCartModalOpen] = useState<boolean>(false);
 
-  const addToCart = (itemId: number) => {
-    setcart((prev) => ({ ...prev, [itemId]: prev[itemId] + 1 }));
+  const addToCart = (itemId: number, quantity: number = 1) => {
+    setcart((prev) => ({ ...prev, [itemId]: prev[itemId] + quantity }));
+    setCartModalOpen(true);
   };
 
   const removeFromCart = (itemId: number) => {
     setcart((prev) => ({ ...prev, [itemId]: prev[itemId] - 1 }));
+  };
+
+  const addToWishlist = (itemId: number) => {
+    setWishlist((prev) => {
+      if (prev.includes(itemId)) {
+        return prev;
+      }
+      return [...prev, itemId];
+    });
+  };
+
+  const removeFromWishlist = (itemId: number) => {
+    setWishlist((prev) => prev.filter((id) => id !== itemId));
+  };
+
+  const isInWishlist = (itemId: number) => {
+    return wishlist.includes(itemId);
   };
 
   const getTotalCartAmount = () => {
@@ -62,6 +88,10 @@ export const ContextProvider: React.FC<ContextProviderProps> = (props) => {
     return total;
   };
 
+  const getTotalWishlistItems = () => {
+    return wishlist.length;
+  };
+
   const contextvalue: ContextValue = {
     AllProducts,
     cart,
@@ -70,6 +100,13 @@ export const ContextProvider: React.FC<ContextProviderProps> = (props) => {
     removeFromCart,
     getTotalCartAmount,
     getTotalcartItems,
+    wishlist,
+    addToWishlist,
+    removeFromWishlist,
+    isInWishlist,
+    getTotalWishlistItems,
+    cartModalOpen,
+    setCartModalOpen,
   };
 
   return (

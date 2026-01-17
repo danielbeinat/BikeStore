@@ -42,9 +42,10 @@ export const Register = () => {
   const onSubmit = async (data: RegisterFormValues) => {
     try {
       setIsLoading(true);
+      // TODO: Implement actual API call
       // Simular llamada a API
       await new Promise((resolve) => setTimeout(resolve, 1000));
-      console.log("Form data:", data);
+      // TODO: Handle registration response and redirect to login
       toast.success("¡Registro exitoso!");
     } catch (error) {
       toast.error("Error al registrar usuario");

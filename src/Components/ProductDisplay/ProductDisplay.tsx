@@ -1,9 +1,11 @@
 import { useContext, useState } from "react";
+import { motion } from "framer-motion";
 import { Minus, Plus } from "lucide-react";
 import { RelatedProducts } from "../RelatedProducts/RelatedProducts";
 import { Context, ContextValue } from "../../Context/Context";
 import { CartModal } from "../CartModal/CartModal";
 import { Heart } from "lucide-react";
+import { Link } from "react-router-dom";
 
 import { ProductSlider } from "./Slider/ProductSlider.jsx";
 import { SecurityInformation } from "./SecurityInformation/SecurityInformation";
@@ -54,6 +56,41 @@ export const ProductDisplay: React.FC<propsitems> = (props) => {
 
   return (
     <>
+      {/* Breadcrumbs Mejorado */}
+      <motion.div
+        initial={{ opacity: 0, y: -10 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.5 }}
+        className="font-poppins mt-6 mb-4 px-4 sm:px-6 lg:px-20"
+      >
+        <div className="flex items-center gap-2 bg-white/60 backdrop-blur-sm border border-white/30 rounded-full px-4 py-2 shadow-lg hover:bg-white/70 transition-all duration-300 w-fit">
+          <Link
+            to="/"
+            className="text-sm font-medium text-gray-700 hover:text-[#fbbf24] transition-colors duration-200 flex items-center gap-1"
+            onClick={() => window.scrollTo(0, 0)}
+          >
+            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
+            </svg>
+            Inicio
+          </Link>
+          <svg className="w-4 h-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+          </svg>
+          <Link
+            to={`/${product.category}`}
+            className="text-sm font-medium text-gray-700 hover:text-[#fbbf24] transition-colors duration-200 capitalize"
+            onClick={() => window.scrollTo(0, 0)}
+          >
+            {product.category}
+          </Link>
+          <svg className="w-4 h-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+          </svg>
+          <span className="text-sm font-semibold text-[#fbbf24] truncate max-w-[200px]">{product.name}</span>
+        </div>
+      </motion.div>
+
       <div>
         <div className="font-poppins flex flex-col lg:flex-row gap-10 items-start mt-10 px-4 sm:px-6 lg:px-20">
           <ProductSlider product={product} />

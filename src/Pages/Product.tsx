@@ -1,7 +1,6 @@
 import { useContext } from "react";
 import { Context, ContextValue } from "../Context/Context";
 import { useParams, Navigate } from "react-router-dom";
-import { Breadcrumbs } from "../Components/breadcrumbs/Breadcrumbs";
 import { ProductDisplay } from "../Components/ProductDisplay/ProductDisplay";
 import { sanitizeProductId } from "../utils/sanitization";
 import { Product } from "../assets/AllProducts/AllProducts";
@@ -27,7 +26,6 @@ export const ProductPage: React.FC = () => {
 
   return (
     <>
-      <Breadcrumbs product={product} />
       <ProductDisplay product={product} />
     </>
   );

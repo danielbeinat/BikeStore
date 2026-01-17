@@ -55,7 +55,7 @@ export const ProductDisplay: React.FC<propsitems> = (props) => {
   return (
     <>
       <div>
-        <div className="font-poppins flex flex-col lg:flex-row gap-10 items-start mt-10 px-20">
+        <div className="font-poppins flex flex-col lg:flex-row gap-10 items-start mt-10 px-4 sm:px-6 lg:px-20">
           <ProductSlider product={product} />
           <div className="flex flex-col gap-5">
             <h1 className="font-bold text-3xl">{product.name}</h1>

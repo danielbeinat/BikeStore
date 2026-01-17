@@ -78,7 +78,7 @@ export const ChatBox: React.FC = () => {
         animate={{ scale: 1, opacity: 1 }}
         transition={{ duration: 0.3 }}
         onClick={() => setShow(!show)}
-        className="fixed bottom-6 right-6 bg-black text-white p-4 rounded-full shadow-lg cursor-pointer z-50 transition-all duration-300 hover:bg-gray-800 hover:scale-105"
+        className="fixed bottom-4 right-4 sm:bottom-6 sm:right-6 bg-black text-white p-3 sm:p-4 rounded-full shadow-lg cursor-pointer z-50 transition-all duration-300 hover:bg-gray-800 hover:scale-105"
       >
         {show ? (
           <svg
@@ -121,17 +121,17 @@ export const ChatBox: React.FC = () => {
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 20, scale: 0.95 }}
             transition={{ duration: 0.3, ease: "easeOut" }}
-            className="fixed bottom-24 right-6 w-96 h-[500px] z-50"
+            className="fixed bottom-16 right-4 sm:bottom-24 sm:right-6 w-[calc(100vw-3rem)] sm:w-72 md:w-96 h-[calc(60vh)] sm:h-[350px] md:h-[500px] max-w-[calc(100vw-3rem)] sm:max-w-72 z-50"
           >
             {/* Glassmorphism Container */}
             <div className="w-full h-full bg-white/80 backdrop-blur-md border border-white/20 rounded-3xl shadow-2xl overflow-hidden flex flex-col">
               {/* Header */}
-              <div className="bg-[#1a1a1a] text-white p-4 flex justify-between items-center rounded-t-3xl">
-                <div className="flex items-center gap-3">
-                  <div className="w-3 h-3 bg-[#fbbf24] rounded-full animate-pulse"></div>
+              <div className="bg-[#1a1a1a] text-white p-3 sm:p-4 flex justify-between items-center rounded-t-3xl">
+                <div className="flex items-center gap-2 sm:gap-3">
+                  <div className="w-2 h-2 sm:w-3 sm:h-3 bg-[#fbbf24] rounded-full animate-pulse"></div>
                   <div>
-                    <h2 className="text-lg font-semibold">Chat BiciShoop</h2>
-                    <p className="text-sm text-[#fbbf24]">En línea</p>
+                    <h2 className="text-base sm:text-lg font-semibold">Chat BiciShoop</h2>
+                    <p className="text-xs sm:text-sm text-[#fbbf24]">En línea</p>
                   </div>
                 </div>
                 <button
@@ -156,7 +156,7 @@ export const ChatBox: React.FC = () => {
               </div>
 
               {/* Messages Container */}
-              <div className="flex-1 overflow-y-auto p-4 space-y-4 bg-gradient-to-b from-gray-50/50 to-white/50">
+              <div className="flex-1 overflow-y-auto p-3 sm:p-4 space-y-3 sm:space-y-4 bg-gradient-to-b from-gray-50/50 to-white/50">
                 {messages.map((message) => (
                   <motion.div
                     key={message.id}
@@ -166,7 +166,7 @@ export const ChatBox: React.FC = () => {
                     className={`flex ${message.sender === 'user' ? 'justify-end' : 'justify-start'}`}
                   >
                     <div
-                      className={`max-w-[80%] px-4 py-3 rounded-2xl shadow-sm ${
+                      className={`max-w-[85%] sm:max-w-[80%] px-3 py-2 sm:px-4 sm:py-3 rounded-2xl shadow-sm ${
                         message.sender === 'user'
                           ? 'bg-[#fbbf24] text-black rounded-br-md'
                           : 'bg-white text-gray-800 rounded-bl-md shadow-sm border border-gray-100'
@@ -189,7 +189,7 @@ export const ChatBox: React.FC = () => {
                     animate={{ opacity: 1 }}
                     className="flex justify-start"
                   >
-                    <div className="bg-white px-4 py-3 rounded-2xl rounded-bl-md shadow-sm border border-gray-100">
+                    <div className="bg-white px-3 py-2 sm:px-4 sm:py-3 rounded-2xl rounded-bl-md shadow-sm border border-gray-100">
                       <div className="flex space-x-1">
                         <div className="w-2 h-2 bg-gray-400 rounded-full animate-bounce"></div>
                         <div className="w-2 h-2 bg-gray-400 rounded-full animate-bounce" style={{ animationDelay: '0.1s' }}></div>
@@ -202,7 +202,7 @@ export const ChatBox: React.FC = () => {
               </div>
 
               {/* Input Area */}
-              <div className="p-4 bg-white/60 backdrop-blur-sm border-t border-white/20 rounded-b-3xl">
+              <div className="p-3 sm:p-4 bg-white/60 backdrop-blur-sm border-t border-white/20 rounded-b-3xl">
                 <form onSubmit={handleSendMessage} className="flex gap-2">
                   <div className="flex-1 relative">
                     <input
@@ -210,17 +210,17 @@ export const ChatBox: React.FC = () => {
                       value={inputMessage}
                       onChange={(e) => setInputMessage(e.target.value)}
                       placeholder="Escribe tu mensaje..."
-                      className="w-full px-4 py-3 pr-12 bg-white/70 backdrop-blur-sm border border-gray-200 rounded-full focus:outline-none focus:ring-2 focus:ring-[#fbbf24] focus:border-transparent transition-all duration-200 placeholder-gray-400"
+                      className="w-full px-3 py-2 sm:px-4 sm:py-3 pr-10 sm:pr-12 bg-white/70 backdrop-blur-sm border border-gray-200 rounded-full focus:outline-none focus:ring-2 focus:ring-[#fbbf24] focus:border-transparent transition-all duration-200 placeholder-gray-400 text-sm sm:text-base"
                     />
                   </div>
                   <button
                     type="submit"
                     disabled={!inputMessage.trim()}
-                    className="bg-[#fbbf24] hover:bg-[#f59e0b] disabled:bg-gray-300 disabled:cursor-not-allowed text-black p-3 rounded-full transition-all duration-200 hover:scale-105 focus:outline-none focus:ring-2 focus:ring-[#fbbf24] focus:ring-offset-2"
+                    className="bg-[#fbbf24] hover:bg-[#f59e0b] disabled:bg-gray-300 disabled:cursor-not-allowed text-black p-2 sm:p-3 rounded-full transition-all duration-200 hover:scale-105 focus:outline-none focus:ring-2 focus:ring-[#fbbf24] focus:ring-offset-2"
                   >
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
-                      className="h-5 w-5"
+                      className="h-4 w-4 sm:h-5 sm:w-5"
                       fill="none"
                       viewBox="0 0 24 24"
                       stroke="currentColor"

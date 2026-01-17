@@ -45,7 +45,7 @@ export const Category: React.FC<propsproduct> = (props) => {
   return (
     <>
       <div className="font-poppins mt-10 px-4 lg:px-5">
-        <div className="flex flex-col gap-10 lg:flex-row justify-between items-center px-10 ">
+        <div className="flex flex-col gap-10 lg:flex-row justify-between items-center px-4 sm:px-6 lg:px-10">
           <div className="flex gap-1">
             <Link
               to="/"
@@ -75,7 +75,7 @@ export const Category: React.FC<propsproduct> = (props) => {
           </div>
         </div>
 
-        <section className="grid grid-cols-1 gap-6 lg:grid-cols-4 lg:place-items-center mt-20">
+        <section className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-4 lg:place-items-center mt-20">
           {sortedProducts.map((product, i) => {
             if (product.category === props.Category) {
               return (

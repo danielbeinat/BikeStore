@@ -47,7 +47,7 @@ export const News: React.FC = () => {
           Novedades
         </h1>
 
-        <section className="grid grid-cols-1 gap-6 lg:grid-cols-4 lg:place-items-center">
+        <section className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-4 lg:place-items-center">
           {productsToShow.length === 0 ? (
             <p className="col-span-full text-center text-gray-500">No hay productos disponibles</p>
           ) : (

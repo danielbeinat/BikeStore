@@ -24,7 +24,7 @@ export const Featured: React.FC = () => {
           Destacados
         </h1>
 
-        <section className="grid grid-cols-1 gap-6 lg:grid-cols-4 lg:place-items-center">
+        <section className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-4 lg:place-items-center">
           {bike.map((product, index) => (
             <Item
               key={index}

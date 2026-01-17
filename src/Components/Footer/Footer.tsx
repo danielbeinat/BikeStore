@@ -214,9 +214,6 @@ export function Footer() {
               <p className="text-sm text-gray-400">
                 © {new Date().getFullYear()} BiciShoop - Todos los derechos reservados
               </p>
-              <div className="flex items-center gap-2 text-xs text-gray-500">
-                <span>🇦🇷 Hecho con ❤️ en Argentina</span>
-              </div>
             </div>
             <div className="flex items-center gap-6">
               <Link to="/privacidad" className="text-sm text-gray-400 hover:text-[#fbbf24] transition-colors duration-300">

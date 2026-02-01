@@ -3,7 +3,7 @@ const nextConfig = {
     reactStrictMode: true,
     swcMinify: true,
     images: {
-        unoptimized: true,
+        unoptimized: process.env.NODE_ENV !== 'production',
         domains: [],
         remotePatterns: [
             {

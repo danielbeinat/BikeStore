@@ -1,6 +1,6 @@
 "use client";
 
-import { createContext, useState, ReactNode } from "react";
+import { createContext, useState, ReactNode, useMemo, useCallback } from "react";
 import { AllProducts, Product } from "@/src/assets/AllProducts/AllProducts";
 
 export interface ContextValue {
@@ -39,33 +39,33 @@ export const ContextProvider = (props: ContextProviderProps) => {
   const [wishlist, setWishlist] = useState<number[]>([]);
   const [cartModalOpen, setCartModalOpen] = useState<boolean>(false);
 
-  const addToCart = (itemId: number, quantity: number = 1) => {
+  const addToCart = useCallback((itemId: number, quantity: number = 1) => {
     setcart((prev) => ({ ...prev, [itemId]: prev[itemId] + quantity }));
     setCartModalOpen(true);
-  };
+  }, []);
 
-  const removeFromCart = (itemId: number) => {
+  const removeFromCart = useCallback((itemId: number) => {
     setcart((prev) => ({ ...prev, [itemId]: prev[itemId] - 1 }));
-  };
+  }, []);
 
-  const addToWishlist = (itemId: number) => {
+  const addToWishlist = useCallback((itemId: number) => {
     setWishlist((prev) => {
       if (prev.includes(itemId)) {
         return prev;
       }
       return [...prev, itemId];
     });
-  };
+  }, []);
 
-  const removeFromWishlist = (itemId: number) => {
+  const removeFromWishlist = useCallback((itemId: number) => {
     setWishlist((prev) => prev.filter((id) => id !== itemId));
-  };
+  }, []);
 
-  const isInWishlist = (itemId: number) => {
+  const isInWishlist = useCallback((itemId: number) => {
     return wishlist.includes(itemId);
-  };
+  }, [wishlist]);
 
-  const getTotalCartAmount = () => {
+  const getTotalCartAmount = useCallback(() => {
     let total = 0;
     for (const item in cart) {
       if (cart[item] > 0) {
@@ -78,9 +78,9 @@ export const ContextProvider = (props: ContextProviderProps) => {
       }
     }
     return total;
-  };
+  }, [cart]);
 
-  const getTotalcartItems = () => {
+  const getTotalcartItems = useCallback(() => {
     let total = 0;
     for (const item in cart) {
       if (cart[item] > 0) {
@@ -88,28 +88,43 @@ export const ContextProvider = (props: ContextProviderProps) => {
       }
     }
     return total;
-  };
+  }, [cart]);
 
-  const getTotalWishlistItems = () => {
+  const getTotalWishlistItems = useCallback(() => {
     return wishlist.length;
-  };
+  }, [wishlist]);
 
-  const contextvalue: ContextValue = {
-    AllProducts,
-    cart,
-    setcart,
-    addToCart,
-    removeFromCart,
-    getTotalCartAmount,
-    getTotalcartItems,
-    wishlist,
-    addToWishlist,
-    removeFromWishlist,
-    isInWishlist,
-    getTotalWishlistItems,
-    cartModalOpen,
-    setCartModalOpen,
-  };
+  const contextvalue: ContextValue = useMemo(
+    () => ({
+      AllProducts,
+      cart,
+      setcart,
+      addToCart,
+      removeFromCart,
+      getTotalCartAmount,
+      getTotalcartItems,
+      wishlist,
+      addToWishlist,
+      removeFromWishlist,
+      isInWishlist,
+      getTotalWishlistItems,
+      cartModalOpen,
+      setCartModalOpen,
+    }),
+    [
+      cart,
+      wishlist,
+      cartModalOpen,
+      addToCart,
+      removeFromCart,
+      getTotalCartAmount,
+      getTotalcartItems,
+      addToWishlist,
+      removeFromWishlist,
+      isInWishlist,
+      getTotalWishlistItems,
+    ],
+  );
 
   return (
     <Context.Provider value={contextvalue}>{props.children}</Context.Provider>

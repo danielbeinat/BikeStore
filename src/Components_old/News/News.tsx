@@ -1,3 +1,4 @@
+import React from "react";
 import { AllProducts } from "../../assets/AllProducts/AllProducts";
 import { Item } from "../Item/Item";
 
@@ -69,3 +70,5 @@ export const News: React.FC = () => {
     </>
   );
 };
+
+export default React.memo(News);

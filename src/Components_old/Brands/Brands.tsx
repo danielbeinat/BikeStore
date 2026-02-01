@@ -38,3 +38,5 @@ export const Brands: React.FC = () => {
     </section>
   );
 };
+
+export default React.memo(Brands);

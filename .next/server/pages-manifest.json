@@ -1,14 +1,1 @@
-{
-  "/_app": "pages/_app.js",
-  "/_error": "pages/_error.js",
-  "/Account/Login": "pages/Account/Login.js",
-  "/Account/Register": "pages/Account/Register.js",
-  "/Cart": "pages/Cart.js",
-  "/Category": "pages/Category.js",
-  "/Checkout": "pages/Checkout.js",
-  "/Home": "pages/Home.js",
-  "/News": "pages/News.js",
-  "/Product": "pages/Product.js",
-  "/SearchResults": "pages/SearchResults.js",
-  "/_document": "pages/_document.js"
-}
+{}

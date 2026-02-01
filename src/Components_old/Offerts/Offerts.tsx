@@ -1,3 +1,4 @@
+import React from "react";
 import { AllProducts } from "../../assets/AllProducts/AllProducts";
 import { Item } from "../Item/Item";
 
@@ -42,3 +43,5 @@ export const Offerts = () => {
     </>
   );
 };
+
+export default React.memo(Offerts);

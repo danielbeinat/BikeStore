@@ -15,20 +15,20 @@ interface EnvConfig {
 /**
  * Get environment configuration
  *
- * Environment variables should be prefixed with VITE_ for Vite to expose them
- * Example: VITE_API_BASE_URL=https://api.example.com
+ * Environment variables in Next.js should be prefixed with NEXT_PUBLIC_ for client-side access
+ * Example: NEXT_PUBLIC_API_BASE_URL=https://api.example.com
  */
 export const getEnvConfig = (): EnvConfig => {
-  const env = import.meta.env.MODE || "development";
+  const env = process.env.NODE_ENV || "development";
 
   return {
     apiBaseUrl:
-      import.meta.env.VITE_API_BASE_URL || "http://localhost:3000/api",
-    apiTimeout: Number(import.meta.env.VITE_API_TIMEOUT) || 10000,
+      process.env.NEXT_PUBLIC_API_BASE_URL || "http://localhost:3000/api",
+    apiTimeout: Number(process.env.NEXT_PUBLIC_API_TIMEOUT) || 10000,
     environment:
       (env as "development" | "staging" | "production") || "development",
     enableDebug:
-      import.meta.env.VITE_ENABLE_DEBUG === "true" || env === "development",
+      process.env.NEXT_PUBLIC_ENABLE_DEBUG === "true" || env === "development",
   };
 };
 

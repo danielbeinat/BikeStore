@@ -1,10 +1,12 @@
+"use client";
+
 import { Fragment } from "react";
 import { Dialog, Transition } from "@headlessui/react";
 import { X } from "lucide-react";
-import { Context, ContextValue } from "../../Context/Context";
+import { Context, ContextValue } from "@/src/context/Context";
 import { useContext } from "react";
 
-import { Link } from "react-router-dom";
+import Link from "next/link";
 
 interface Product {
   id: number;
@@ -146,7 +148,7 @@ export const CartModal: React.FC<propstate> = ({ open, setOpen }) => {
                       </p>
                       <div className="mt-6">
                         <Link
-                          to="/cart"
+                          href="/cart"
                           className="flex items-center justify-center rounded-md border border-transparent bg-black px-6 py-3 text-base font-medium text-white shadow-sm "
                           onClick={() => {
                             setOpen(false);

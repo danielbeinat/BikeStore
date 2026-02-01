@@ -1,9 +1,11 @@
+"use client";
+
 import { Fragment } from "react";
 import { Dialog, Transition } from "@headlessui/react";
 import { X } from "lucide-react";
-import { Context, ContextValue } from "../../Context/Context";
+import { Context, ContextValue } from "@/src/context/Context";
 import { useContext } from "react";
-import { Link } from "react-router-dom";
+import Link from "next/link";
 import { Heart } from "lucide-react";
 
 interface Product {
@@ -98,7 +100,7 @@ export const WishlistModal: React.FC<propstate> = ({ open, setOpen }) => {
                                 <li key={product.id} className="flex py-6">
                                   <div className="h-24 w-24 flex-shrink-0 overflow-hidden rounded-md border border-gray-200">
                                     <Link
-                                      to={`/product/${product.id}`}
+                                      href={`/product/${product.id}`}
                                       onClick={() => setOpen(false)}
                                     >
                                       <img
@@ -114,7 +116,7 @@ export const WishlistModal: React.FC<propstate> = ({ open, setOpen }) => {
                                       <div className="flex justify-between text-base font-medium text-gray-900">
                                         <h3>
                                           <Link
-                                            to={`/product/${product.id}`}
+                                            href={`/product/${product.id}`}
                                             onClick={() => setOpen(false)}
                                             className="hover:text-gray-600"
                                           >
@@ -156,7 +158,7 @@ export const WishlistModal: React.FC<propstate> = ({ open, setOpen }) => {
                       <div className="border-t border-gray-200 px-4 py-6 sm:px-6">
                         <div className="mt-6">
                           <Link
-                            to="/"
+                            href="/"
                             className="flex items-center justify-center rounded-md border border-transparent bg-black px-6 py-3 text-base font-medium text-white shadow-sm hover:bg-gray-800 transition-colors"
                             onClick={() => setOpen(false)}
                           >

@@ -1,5 +1,7 @@
-import { Navigate } from "react-router-dom";
-import { ReactNode } from "react";
+"use client";
+
+import { useRouter } from "next/navigation";
+import { ReactNode, useEffect } from "react";
 
 interface ProtectedRouteProps {
   children: ReactNode;
@@ -12,11 +14,19 @@ export const ProtectedRoute: React.FC<ProtectedRouteProps> = ({
   requireAuth = false,
   redirectTo = "/login",
 }) => {
+  const router = useRouter();
+  
   // Placeholder for future authentication implementation
   const isAuthenticated = false;
 
+  useEffect(() => {
+    if (requireAuth && !isAuthenticated) {
+      router.push(redirectTo);
+    }
+  }, [requireAuth, isAuthenticated, redirectTo, router]);
+
   if (requireAuth && !isAuthenticated) {
-    return <Navigate to={redirectTo} replace />;
+    return null;
   }
 
   return <>{children}</>;

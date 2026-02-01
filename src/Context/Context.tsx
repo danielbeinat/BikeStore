@@ -1,5 +1,7 @@
-import { createContext, useState } from "react";
-import { AllProducts, Product } from "../assets/AllProducts/AllProducts";
+"use client";
+
+import { createContext, useState, ReactNode } from "react";
+import { AllProducts, Product } from "@/src/assets/AllProducts/AllProducts";
 
 export interface ContextValue {
   AllProducts: Product[];
@@ -29,10 +31,10 @@ const getDefaultCart = () => {
 };
 
 interface ContextProviderProps {
-  children: React.ReactNode;
+  children: ReactNode;
 }
 
-export const ContextProvider: React.FC<ContextProviderProps> = (props) => {
+export const ContextProvider = (props: ContextProviderProps) => {
   const [cart, setcart] = useState<{ [key: number]: number }>(getDefaultCart());
   const [wishlist, setWishlist] = useState<number[]>([]);
   const [cartModalOpen, setCartModalOpen] = useState<boolean>(false);
@@ -110,8 +112,6 @@ export const ContextProvider: React.FC<ContextProviderProps> = (props) => {
   };
 
   return (
-    <>
-      <Context.Provider value={contextvalue}>{props.children}</Context.Provider>
-    </>
+    <Context.Provider value={contextvalue}>{props.children}</Context.Provider>
   );
 };

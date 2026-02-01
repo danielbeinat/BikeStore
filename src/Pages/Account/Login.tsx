@@ -1,8 +1,10 @@
+"use client";
+
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
-import { Toaster, toast } from "react-hot-toast";
+import { toast, Toaster } from "react-hot-toast";
 import { Mail, Lock, LogIn, Github } from "lucide-react";
 import { clsx } from "clsx";
 
@@ -16,7 +18,7 @@ const loginSchema = z.object({
 
 type LoginFormValues = z.infer<typeof loginSchema>;
 
-export const Login = () => {
+export default function Login() {
   const [isLoading, setIsLoading] = useState(false);
 
   const {

@@ -1,9 +1,11 @@
+"use client";
+
 import React, { useContext, useState } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import { toast, Toaster } from "react-hot-toast";
-import { Context, ContextValue } from "../../Context/Context";
+import { Context, ContextValue } from "@/src/context/Context";
 import { Mail, User, MapPin, CreditCard, ChevronRight, Check } from "lucide-react";
 import { clsx } from "clsx";
 import { motion, AnimatePresence } from "framer-motion";
@@ -31,7 +33,7 @@ type DeliveryFormValues = z.infer<typeof deliverySchema>;
 
 type CheckoutStep = 1 | 2 | 3 | 4;
 
-export const Checkout: React.FC = () => {
+export default function Checkout() {
   const { getTotalCartAmount } = useContext(Context) as ContextValue;
   const [currentStep, setCurrentStep] = useState<CheckoutStep>(1);
   const [completedSteps, setCompletedSteps] = useState<CheckoutStep[]>([]);
@@ -467,4 +469,4 @@ export const Checkout: React.FC = () => {
       </div>
     </>
   );
-};
+}

@@ -1,8 +1,10 @@
+"use client";
+
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
-import { Toaster, toast } from "react-hot-toast";
+import { toast, Toaster } from "react-hot-toast";
 import { Mail, Lock, User, LogIn, Github, UserPlus } from "lucide-react";
 import { clsx } from "clsx";
 
@@ -28,7 +30,7 @@ const registerSchema = z
 
 type RegisterFormValues = z.infer<typeof registerSchema>;
 
-export const Register = () => {
+export default function Register() {
   const [isLoading, setIsLoading] = useState(false);
 
   const {

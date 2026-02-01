@@ -1,11 +1,13 @@
-import React, { useContext, useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
-import { Context, ContextValue } from "../Context/Context";
-import { Item } from "../Components/Item/Item";
-import { sanitizeSearchQuery } from "../utils/sanitization";
+"use client";
 
-export const SearchResults: React.FC = () => {
-  const { query } = useParams<{ query: string }>();
+import React, { useContext, useEffect, useState } from "react";
+import { useParams } from "next/navigation";
+import { Context, ContextValue } from "@/src/context/Context";
+import Item from "@/src/components/Item/Item";
+import { sanitizeSearchQuery } from "@/src/utils/sanitization";
+
+export default function SearchResults() {
+  const { query } = useParams() as { query?: string };
   const { AllProducts } = useContext(Context) as ContextValue;
   const [searchResults, setSearchResults] = useState<any[]>([]);
 
@@ -45,4 +47,4 @@ export const SearchResults: React.FC = () => {
       )}
     </div>
   );
-};
+}

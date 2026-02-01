@@ -1,11 +1,13 @@
-import { Slider } from "../Components/Slider/Slider";
-import { SecurePurchase } from "../Components/SecurePurchase/SecurePurchase";
-import { Offerts } from "../Components/Offerts/Offerts";
-import { News } from "../Components/News/News";
-import { Featured } from "../Components/Featured/Featured";
-import { Brands } from "../Components/Brands/Brands";
+"use client";
 
-export const Home: React.FC = () => {
+import Slider from "@/src/components/Slider/Slider";
+import SecurePurchase from "@/src/components/SecurePurchase/SecurePurchase";
+import Offerts from "@/src/components/Offerts/Offerts";
+import News from "@/src/components/News/News";
+import Featured from "@/src/components/Featured/Featured";
+import Brands from "@/src/components/Brands/Brands";
+
+export default function Home() {
   return (
     <>
       <Slider />
@@ -16,4 +18,4 @@ export const Home: React.FC = () => {
       <Brands />
     </>
   );
-};
+}

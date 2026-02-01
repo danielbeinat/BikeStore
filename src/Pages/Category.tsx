@@ -1,10 +1,12 @@
+"use client";
+
 import { useContext, useState } from "react";
 import { motion } from "framer-motion";
-import { Context, ContextValue } from "../Context/Context.jsx";
-import { Item } from "../Components/Item/Item.jsx";
-import { Link } from "react-router-dom";
+import Link from "next/link";
+import { Context, ContextValue } from "@/src/context/Context";
+import Item from "@/src/components/Item/Item";
 
-interface propsproduct {
+interface CategoryProps {
   Category: string;
 }
 
@@ -17,7 +19,7 @@ interface Product {
   type?: any;
 }
 
-export const Category: React.FC<propsproduct> = (props) => {
+export default function CategoryPage({ Category }: CategoryProps) {
   const { AllProducts } = useContext(Context) as ContextValue;
 
   const [sortedProducts, setSortedProducts] = useState<Product[]>([
@@ -55,7 +57,7 @@ export const Category: React.FC<propsproduct> = (props) => {
             className="flex items-center gap-2 bg-white/60 backdrop-blur-sm border border-white/30 rounded-full px-4 py-2 shadow-lg hover:bg-white/70 transition-all duration-300"
           >
             <Link
-              to="/"
+              href="/"
               className="text-sm font-medium text-gray-700 hover:text-[#fbbf24] transition-colors duration-200 flex items-center gap-1"
               onClick={() => window.scrollTo(0, 0)}
             >
@@ -67,7 +69,7 @@ export const Category: React.FC<propsproduct> = (props) => {
             <svg className="w-4 h-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
             </svg>
-            <span className="text-sm font-semibold text-[#fbbf24] capitalize">{props.Category}</span>
+            <span className="text-sm font-semibold text-[#fbbf24] capitalize">{Category}</span>
           </motion.div>
 
           {/* Selector de Orden Mejorado */}
@@ -104,7 +106,7 @@ export const Category: React.FC<propsproduct> = (props) => {
 
         <section className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-4 lg:place-items-center mt-20">
           {sortedProducts.map((product, i) => {
-            if (product.category === props.Category) {
+            if (product.category === Category) {
               return (
                 <Item
                   key={i}
@@ -131,4 +133,4 @@ export const Category: React.FC<propsproduct> = (props) => {
       </div>
     </>
   );
-};
+}

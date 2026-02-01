@@ -1,27 +1,28 @@
-import { useContext } from "react";
-import { Context, ContextValue } from "../Context/Context";
-import { useParams, Navigate } from "react-router-dom";
-import { ProductDisplay } from "../Components/ProductDisplay/ProductDisplay";
-import { sanitizeProductId } from "../utils/sanitization";
-import { Product } from "../assets/AllProducts/AllProducts";
+"use client";
 
-export const ProductPage: React.FC = () => {
+import { useContext } from "react";
+import { useParams } from "next/navigation";
+import { Context, ContextValue } from "@/src/context/Context";
+import ProductDisplay from "@/src/components/ProductDisplay/ProductDisplay";
+import { sanitizeProductId } from "@/src/utils/sanitization";
+import { Product } from "@/src/assets/AllProducts/AllProducts";
+import { notFound } from "next/navigation";
+
+export default function ProductPage() {
   const { AllProducts } = useContext(Context) as ContextValue;
-  const { productId } = useParams<{ productId: string }>();
+  const { id: productId } = useParams() as { id?: string };
 
   // Sanitize and validate product ID
   const sanitizedId = sanitizeProductId(productId);
 
   if (!sanitizedId) {
-    // Invalid product ID - redirect to home or show 404
-    return <Navigate to="/" replace />;
+    notFound();
   }
 
   const product = AllProducts.find((p: Product) => p.id === sanitizedId);
 
   if (!product) {
-    // Product not found - redirect to home or show 404
-    return <Navigate to="/" replace />;
+    notFound();
   }
 
   return (
@@ -29,7 +30,4 @@ export const ProductPage: React.FC = () => {
       <ProductDisplay product={product} />
     </>
   );
-};
-
-// Export with original name for backward compatibility
-export const Product = ProductPage;
+}

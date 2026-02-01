@@ -1,6 +1,8 @@
+"use client";
+
 import { useContext } from "react";
-import { Context, ContextValue } from "../Context/Context";
-import { Link } from "react-router-dom";
+import Link from "next/link";
+import { Context, ContextValue } from "@/src/context/Context";
 
 interface Item {
   id: number;
@@ -9,7 +11,7 @@ interface Item {
   price: number;
   // Agrega cualquier otra propiedad que tenga tu aplicación
 }
-export const Cart = () => {
+export default function Cart() {
   const { AllProducts, cart, removeFromCart, getTotalCartAmount } = useContext(
     Context
   ) as ContextValue;
@@ -124,7 +126,7 @@ export const Cart = () => {
               </p>
             </div>
           </div>
-          <Link to="/checkout">
+          <Link href="/checkout">
             <button
               className="bg-black text-white w-full p-2 rounded"
               type="submit"

@@ -25,7 +25,7 @@ type propstate = {
 
 export const CartModal: React.FC<propstate> = ({ open, setOpen }) => {
   const { AllProducts, cart, removeFromCart, getTotalCartAmount } = useContext(
-    Context
+    Context,
   ) as ContextValue;
 
   return (

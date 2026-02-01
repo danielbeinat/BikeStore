@@ -15,7 +15,7 @@ export const ProtectedRoute: React.FC<ProtectedRouteProps> = ({
   redirectTo = "/login",
 }) => {
   const router = useRouter();
-  
+
   // Placeholder for future authentication implementation
   const isAuthenticated = false;
 

@@ -76,7 +76,7 @@ export default function Login() {
                     "focus:ring-2 focus:ring-inset focus:ring-blue-500",
                     "outline-none transition-all duration-200",
                     "sm:text-sm sm:leading-6",
-                    errors.email && "ring-red-500 focus:ring-red-500"
+                    errors.email && "ring-red-500 focus:ring-red-500",
                   )}
                   {...register("email")}
                 />
@@ -106,7 +106,7 @@ export default function Login() {
                     "focus:ring-2 focus:ring-inset focus:ring-blue-500",
                     "outline-none transition-all duration-200",
                     "sm:text-sm sm:leading-6",
-                    errors.password && "ring-red-500 focus:ring-red-500"
+                    errors.password && "ring-red-500 focus:ring-red-500",
                   )}
                   {...register("password")}
                 />
@@ -140,7 +140,7 @@ export default function Login() {
                   "text-sm font-semibold transition-all duration-200",
                   "bg-black text-white",
                   "disabled:from-blue-500 disabled:to-blue-400 disabled:opacity-70",
-                  isLoading && "cursor-not-allowed"
+                  isLoading && "cursor-not-allowed",
                 )}
               >
                 {isLoading ? (
@@ -167,4 +167,4 @@ export default function Login() {
       </div>
     </>
   );
-};
+}

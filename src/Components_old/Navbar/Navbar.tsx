@@ -24,9 +24,12 @@ import Bikeshoop from "@/src/assets/Bikeshoop.png";
 export default function Navbar() {
   const [isWishlistOpen, setIsWishlistOpen] = useState<boolean>(false);
   const [menuOpen, setMenuOpen] = useState<boolean>(false);
-  const { getTotalcartItems, getTotalWishlistItems, cartModalOpen, setCartModalOpen } = useContext(
-    Context
-  ) as ContextValue;
+  const {
+    getTotalcartItems,
+    getTotalWishlistItems,
+    cartModalOpen,
+    setCartModalOpen,
+  } = useContext(Context) as ContextValue;
 
   const Navlink = [
     { name: "INICIO", to: "/" },
@@ -55,7 +58,13 @@ export default function Navbar() {
               className="flex-shrink-0"
               onClick={() => window.scrollTo(0, 0)}
             >
-              <Image src={Bikeshoop} className="h-14 w-auto transition-transform duration-300 hover:scale-105 drop-shadow-sm border border-white/10 rounded-md" alt="BiciShoop" width={60} height={56} />
+              <Image
+                src={Bikeshoop}
+                className="h-14 w-auto transition-transform duration-300 hover:scale-105 drop-shadow-sm border border-white/10 rounded-md"
+                alt="BiciShoop"
+                width={60}
+                height={56}
+              />
             </Link>
 
             {/* Nav Links - Centrados */}
@@ -199,4 +208,4 @@ export default function Navbar() {
       <WishlistModal open={isWishlistOpen} setOpen={setIsWishlistOpen} />
     </div>
   );
-};
+}

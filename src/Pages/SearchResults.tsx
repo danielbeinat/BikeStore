@@ -16,7 +16,7 @@ export default function SearchResults() {
       // Sanitize search query to prevent XSS attacks
       const sanitizedQuery = sanitizeSearchQuery(query);
       const filteredProducts = AllProducts.filter((product) =>
-        product.name.toLowerCase().includes(sanitizedQuery.toLowerCase())
+        product.name.toLowerCase().includes(sanitizedQuery.toLowerCase()),
       );
       setSearchResults(filteredProducts);
     }

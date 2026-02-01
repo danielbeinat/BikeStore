@@ -13,7 +13,7 @@ interface Item {
 }
 export default function Cart() {
   const { AllProducts, cart, removeFromCart, getTotalCartAmount } = useContext(
-    Context
+    Context,
   ) as ContextValue;
 
   return (
@@ -138,4 +138,4 @@ export default function Cart() {
       </div>
     </>
   );
-};
+}

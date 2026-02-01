@@ -7,6 +7,7 @@ Este proyecto ha sido migrado de **Vite + React Router** a **Next.js 14 (App Rou
 ### Cambios principales:
 
 #### 1. **Estructura de carpetas**
+
 ```
 Antes (Vite):
 ├── src/
@@ -30,10 +31,12 @@ Después (Next.js):
 ```
 
 #### 2. **Dependencias eliminadas**
+
 - ❌ `react-router-dom` - Reemplazado por Next.js routing
 - ❌ `vite` - Reemplazado por Next.js build system
 
 #### 3. **Nuevas dependencias**
+
 - ✅ `next` - Framework full-stack
 - ✅ TypeScript soporte integrado
 - ✅ Image optimization integrado
@@ -41,17 +44,19 @@ Después (Next.js):
 #### 4. **Cambios en el código**
 
 **Rutas (React Router → Next.js):**
+
 ```tsx
 // Antes
 import { Link } from "react-router-dom";
-<Link to="/product/123">Producto</Link>
+<Link to="/product/123">Producto</Link>;
 
 // Después
 import Link from "next/link";
-<Link href="/product/123">Producto</Link>
+<Link href="/product/123">Producto</Link>;
 ```
 
 **Parámetros de ruta:**
+
 ```tsx
 // Antes
 import { useParams } from "react-router-dom";
@@ -63,6 +68,7 @@ const { id: productId } = useParams();
 ```
 
 **Navegación programática:**
+
 ```tsx
 // Antes
 import { useNavigate } from "react-router-dom";
@@ -76,6 +82,7 @@ router.push("/search/" + query);
 ```
 
 **Context API:**
+
 ```tsx
 // Ahora necesita "use client" para client-side state
 "use client";
@@ -83,6 +90,7 @@ import { createContext, useState } from "react";
 ```
 
 #### 5. **Scripts de desarrollo**
+
 ```json
 {
   "scripts": {
@@ -99,18 +107,21 @@ import { createContext, useState } from "react";
 ## Cómo ejecutar el proyecto
 
 ### Desarrollo
+
 ```bash
 npm run dev
 # Se abrirá en http://localhost:3000
 ```
 
 ### Build/Producción
+
 ```bash
 npm run build
 npm run start
 ```
 
 ### Lint
+
 ```bash
 npm run lint
 ```
@@ -119,19 +130,19 @@ npm run lint
 
 ## Rutas disponibles
 
-| Ruta | Componente |
-|------|-----------|
-| `/` | Home |
-| `/bicicletas` | Categoría de Bicicletas |
-| `/accesorios` | Categoría de Accesorios |
-| `/indumentaria` | Categoría de Indumentaria |
-| `/novedades` | Página de Novedades |
-| `/product/[id]` | Detalle de Producto |
-| `/search/[query]` | Resultados de Búsqueda |
-| `/cart` | Carrito |
-| `/checkout` | Checkout |
-| `/login` | Iniciar Sesión |
-| `/register` | Registrarse |
+| Ruta              | Componente                |
+| ----------------- | ------------------------- |
+| `/`               | Home                      |
+| `/bicicletas`     | Categoría de Bicicletas   |
+| `/accesorios`     | Categoría de Accesorios   |
+| `/indumentaria`   | Categoría de Indumentaria |
+| `/novedades`      | Página de Novedades       |
+| `/product/[id]`   | Detalle de Producto       |
+| `/search/[query]` | Resultados de Búsqueda    |
+| `/cart`           | Carrito                   |
+| `/checkout`       | Checkout                  |
+| `/login`          | Iniciar Sesión            |
+| `/register`       | Registrarse               |
 
 ---
 
@@ -149,7 +160,9 @@ npm run lint
 ## Problemas comunes
 
 ### Error: "Module not found"
+
 Asegúrate de que los path aliases en `tsconfig.json` estén correctos:
+
 ```json
 {
   "compilerOptions": {
@@ -162,9 +175,11 @@ Asegúrate de que los path aliases en `tsconfig.json` estén correctos:
 ```
 
 ### Error: "useContext en componente de servidor"
+
 Asegúrate de agregar `"use client";` al inicio del archivo si usas hooks
 
 ### Componentes no cargan
+
 Algunos componentes en `Components_old/` usan React Router todavía. Necesitas migrar los imports a `next/link` y `next/navigation`
 
 ---

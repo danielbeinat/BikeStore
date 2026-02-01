@@ -36,20 +36,25 @@ export const ProductDisplay: React.FC<propsitems> = (props) => {
   const [selectedSize, setSelectedSize] = useState(defaultSize);
   const [quantity, setQuantity] = useState(1);
 
-  const { addToCart, addToWishlist, removeFromWishlist, isInWishlist, cartModalOpen, setCartModalOpen } = useContext(
-    Context
-  ) as ContextValue;
+  const {
+    addToCart,
+    addToWishlist,
+    removeFromWishlist,
+    isInWishlist,
+    cartModalOpen,
+    setCartModalOpen,
+  } = useContext(Context) as ContextValue;
 
   const handleSizeChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setSelectedSize(event.target.value);
   };
 
   const incrementQuantity = () => {
-    setQuantity(prev => prev + 1);
+    setQuantity((prev) => prev + 1);
   };
 
   const decrementQuantity = () => {
-    setQuantity(prev => prev > 1 ? prev - 1 : 1);
+    setQuantity((prev) => (prev > 1 ? prev - 1 : 1));
   };
 
   const installmentPrice = (product.price / 6)
@@ -71,13 +76,33 @@ export const ProductDisplay: React.FC<propsitems> = (props) => {
             className="text-sm font-medium text-gray-700 hover:text-[#fbbf24] transition-colors duration-200 flex items-center gap-1"
             onClick={() => window.scrollTo(0, 0)}
           >
-            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
+            <svg
+              className="w-4 h-4"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"
+              />
             </svg>
             Inicio
           </Link>
-          <svg className="w-4 h-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+          <svg
+            className="w-4 h-4 text-gray-400"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth={2}
+              d="M9 5l7 7-7 7"
+            />
           </svg>
           <Link
             href={`/${product.category}`}
@@ -86,10 +111,22 @@ export const ProductDisplay: React.FC<propsitems> = (props) => {
           >
             {product.category}
           </Link>
-          <svg className="w-4 h-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+          <svg
+            className="w-4 h-4 text-gray-400"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth={2}
+              d="M9 5l7 7-7 7"
+            />
           </svg>
-          <span className="text-sm font-semibold text-[#fbbf24] truncate max-w-[200px]">{product.name}</span>
+          <span className="text-sm font-semibold text-[#fbbf24] truncate max-w-[200px]">
+            {product.name}
+          </span>
         </div>
       </motion.div>
 
@@ -161,7 +198,9 @@ export const ProductDisplay: React.FC<propsitems> = (props) => {
                 >
                   <Minus className="w-4 h-4" />
                 </button>
-                <span className="w-12 text-center font-semibold text-lg">{quantity}</span>
+                <span className="w-12 text-center font-semibold text-lg">
+                  {quantity}
+                </span>
                 <button
                   onClick={incrementQuantity}
                   className="w-10 h-10 rounded-lg border-2 border-gray-300 flex items-center justify-center hover:border-gray-400 hover:bg-gray-50 transition-colors"

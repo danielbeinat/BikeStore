@@ -75,7 +75,7 @@ export default function Register() {
             "focus:ring-2 focus:ring-inset focus:ring-blue-500",
             "outline-none transition-all duration-200",
             "sm:text-sm sm:leading-6",
-            error && "ring-red-500 focus:ring-red-500"
+            error && "ring-red-500 focus:ring-red-500",
           )}
           {...props}
         />
@@ -155,7 +155,7 @@ export default function Register() {
                   "bg-black text-white",
                   "active:from-blue-700 active:to-blue-600",
                   "disabled:from-blue-500 disabled:to-blue-400 disabled:opacity-70",
-                  isLoading && "cursor-not-allowed"
+                  isLoading && "cursor-not-allowed",
                 )}
               >
                 {isLoading ? (
@@ -182,4 +182,4 @@ export default function Register() {
       </div>
     </>
   );
-};
+}

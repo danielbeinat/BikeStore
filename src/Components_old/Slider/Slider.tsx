@@ -24,7 +24,7 @@ const slideContents: SlideContent[] = [
     subtitle: "Bicicletas premium",
     description: "Las mejores marcas del mercado con tecnología de vanguardia",
     ctaText: "Ver colección",
-    ctaLink: "/bicicletas"
+    ctaLink: "/bicicletas",
   },
   {
     id: 2,
@@ -32,7 +32,7 @@ const slideContents: SlideContent[] = [
     subtitle: "Todo lo que necesitas",
     description: "Equipamiento profesional para tu experiencia ciclista",
     ctaText: "Explorar accesorios",
-    ctaLink: "/accesorios"
+    ctaLink: "/accesorios",
   },
   {
     id: 3,
@@ -40,8 +40,8 @@ const slideContents: SlideContent[] = [
     subtitle: "Estilo y confort",
     description: "Ropa técnica diseñada para el rendimiento máximo",
     ctaText: "Ver indumentaria",
-    ctaLink: "/indumentaria"
-  }
+    ctaLink: "/indumentaria",
+  },
 ];
 
 export const Slider: React.FC = () => {
@@ -68,7 +68,8 @@ export const Slider: React.FC = () => {
           className="mySwiper h-80 sm:h-96 md:h-[420px] lg:h-[500px] xl:h-[600px]"
         >
           {Banner.map((item) => {
-            const content = slideContents.find(c => c.id === item.id) || slideContents[0];
+            const content =
+              slideContents.find((c) => c.id === item.id) || slideContents[0];
 
             return (
               <SwiperSlide key={item.id} className="swiper-slide relative">
@@ -135,7 +136,9 @@ export const Slider: React.FC = () => {
                         href={content.ctaLink}
                         className="inline-flex items-center px-4 py-3 sm:px-6 sm:py-4 md:px-8 md:py-4 bg-[#fbbf24] hover:bg-[#f59e0b] text-black font-bold rounded-xl sm:rounded-2xl transition-all duration-300 hover:scale-105 hover:shadow-xl group text-sm sm:text-base"
                       >
-                        <span className="mr-1.5 sm:mr-2">{content.ctaText}</span>
+                        <span className="mr-1.5 sm:mr-2">
+                          {content.ctaText}
+                        </span>
                         <svg
                           xmlns="http://www.w3.org/2000/svg"
                           fill="none"
@@ -161,10 +164,8 @@ export const Slider: React.FC = () => {
               </SwiperSlide>
             );
           })}
-
         </Swiper>
       </div>
-
 
       {/* Scroll Indicator - Hidden on mobile, visible on larger screens */}
       <motion.div

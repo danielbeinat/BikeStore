@@ -70,7 +70,7 @@ export const ContextProvider = (props: ContextProviderProps) => {
     for (const item in cart) {
       if (cart[item] > 0) {
         let itemInfo = AllProducts.find(
-          (product) => product.id === Number(item)
+          (product) => product.id === Number(item),
         );
         if (itemInfo) {
           total += cart[item] * itemInfo.price;

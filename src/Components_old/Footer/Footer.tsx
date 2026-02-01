@@ -36,15 +36,35 @@ export function Footer() {
     {
       icon: MapPin,
       text: "Av. Corrientes 1234, CABA, Argentina",
-      label: "Dirección"
+      label: "Dirección",
     },
   ];
 
   const social = [
-    { icon: Facebook, href: "#", label: "Facebook", color: "hover:text-blue-600" },
-    { icon: Instagram, href: "#", label: "Instagram", color: "hover:text-pink-600" },
-    { icon: Twitter, href: "#", label: "Twitter", color: "hover:text-blue-400" },
-    { icon: Linkedin, href: "#", label: "LinkedIn", color: "hover:text-blue-700" },
+    {
+      icon: Facebook,
+      href: "#",
+      label: "Facebook",
+      color: "hover:text-blue-600",
+    },
+    {
+      icon: Instagram,
+      href: "#",
+      label: "Instagram",
+      color: "hover:text-pink-600",
+    },
+    {
+      icon: Twitter,
+      href: "#",
+      label: "Twitter",
+      color: "hover:text-blue-400",
+    },
+    {
+      icon: Linkedin,
+      href: "#",
+      label: "LinkedIn",
+      color: "hover:text-blue-700",
+    },
   ];
 
   const features = [
@@ -79,7 +99,8 @@ export function Footer() {
                 BiciShoop
               </h3>
               <p className="text-gray-300 leading-relaxed">
-                Tu tienda de ciclismo de confianza. Equipos premium, asesoramiento experto y la mejor experiencia de compra.
+                Tu tienda de ciclismo de confianza. Equipos premium,
+                asesoramiento experto y la mejor experiencia de compra.
               </p>
             </div>
 
@@ -94,7 +115,9 @@ export function Footer() {
                   className="flex items-center gap-2 bg-white/10 backdrop-blur-sm rounded-xl p-3 border border-white/20"
                 >
                   <feature.icon className={`w-4 h-4 ${feature.color}`} />
-                  <span className="text-xs font-medium text-gray-200">{feature.text}</span>
+                  <span className="text-xs font-medium text-gray-200">
+                    {feature.text}
+                  </span>
                 </motion.div>
               ))}
             </div>
@@ -106,7 +129,9 @@ export function Footer() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.2 }}
           >
-            <h4 className="text-lg font-bold mb-6 text-[#fbbf24]">Navegación</h4>
+            <h4 className="text-lg font-bold mb-6 text-[#fbbf24]">
+              Navegación
+            </h4>
             <ul className="space-y-3">
               {navigation.map((item, index) => (
                 <motion.li
@@ -132,7 +157,9 @@ export function Footer() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.3 }}
           >
-            <h4 className="text-lg font-bold mb-6 text-[#fbbf24]">Información</h4>
+            <h4 className="text-lg font-bold mb-6 text-[#fbbf24]">
+              Información
+            </h4>
             <ul className="space-y-3">
               {info.map((item, index) => (
                 <motion.li
@@ -172,7 +199,9 @@ export function Footer() {
                     <item.icon className="w-4 h-4 text-[#fbbf24]" />
                   </div>
                   <div>
-                    <p className="text-xs text-gray-400 font-medium uppercase tracking-wide">{item.label}</p>
+                    <p className="text-xs text-gray-400 font-medium uppercase tracking-wide">
+                      {item.label}
+                    </p>
                     <p className="text-sm text-gray-300">{item.text}</p>
                   </div>
                 </motion.div>
@@ -181,7 +210,9 @@ export function Footer() {
 
             {/* Social Media */}
             <div>
-              <h5 className="text-sm font-semibold mb-4 text-gray-200">Síguenos</h5>
+              <h5 className="text-sm font-semibold mb-4 text-gray-200">
+                Síguenos
+              </h5>
               <div className="flex gap-3">
                 {social.map((item, index) => (
                   <motion.a
@@ -200,7 +231,6 @@ export function Footer() {
             </div>
           </motion.div>
         </motion.div>
-
       </div>
 
       {/* Bottom section */}
@@ -214,14 +244,21 @@ export function Footer() {
           >
             <div className="flex flex-col sm:flex-row items-center gap-4 text-center sm:text-left">
               <p className="text-sm text-gray-400">
-                © {new Date().getFullYear()} BiciShoop - Todos los derechos reservados
+                © {new Date().getFullYear()} BiciShoop - Todos los derechos
+                reservados
               </p>
             </div>
             <div className="flex items-center gap-6">
-              <Link href="/privacidad" className="text-sm text-gray-400 hover:text-[#fbbf24] transition-colors duration-300">
+              <Link
+                href="/privacidad"
+                className="text-sm text-gray-400 hover:text-[#fbbf24] transition-colors duration-300"
+              >
                 Privacidad
               </Link>
-              <Link href="/cookies" className="text-sm text-gray-400 hover:text-[#fbbf24] transition-colors duration-300">
+              <Link
+                href="/cookies"
+                className="text-sm text-gray-400 hover:text-[#fbbf24] transition-colors duration-300"
+              >
                 Cookies
               </Link>
               <div className="text-sm text-gray-500">

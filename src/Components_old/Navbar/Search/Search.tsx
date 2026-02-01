@@ -14,7 +14,7 @@ export default function Search() {
   const searchRef = useRef<HTMLDivElement>(null);
 
   const filteredProducts = AllProducts.filter((product) =>
-    product.name.toLowerCase().includes(searchTerm.toLowerCase())
+    product.name.toLowerCase().includes(searchTerm.toLowerCase()),
   ).slice(0, 5);
 
   const handleSearch = () => {
@@ -27,7 +27,10 @@ export default function Search() {
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
-      if (searchRef.current && !searchRef.current.contains(event.target as Node)) {
+      if (
+        searchRef.current &&
+        !searchRef.current.contains(event.target as Node)
+      ) {
         setShowResults(false);
       }
     };

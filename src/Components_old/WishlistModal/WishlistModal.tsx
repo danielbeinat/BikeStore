@@ -25,11 +25,11 @@ type propstate = {
 
 export const WishlistModal: React.FC<propstate> = ({ open, setOpen }) => {
   const { AllProducts, wishlist, removeFromWishlist } = useContext(
-    Context
+    Context,
   ) as ContextValue;
 
   const wishlistProducts = AllProducts.filter((product) =>
-    wishlist.includes(product.id)
+    wishlist.includes(product.id),
   );
 
   return (

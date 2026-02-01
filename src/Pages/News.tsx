@@ -4,8 +4,7 @@ import { AllProducts } from "@/src/assets/AllProducts/AllProducts";
 import Item from "@/src/components/Item/Item";
 
 // Obtener los últimos 4 productos agregados (IDs más altos = más recientes)
-const latestProducts = AllProducts
-  .sort((a, b) => b.id - a.id) // Ordenar por ID descendente (más reciente primero)
+const latestProducts = AllProducts.sort((a, b) => b.id - a.id) // Ordenar por ID descendente (más reciente primero)
   .slice(0, 4); // Tomar los primeros 4 (más recientes)
 
 // Datos de prueba por si AllProducts está vacío
@@ -16,7 +15,7 @@ const testProducts = [
     name: "Producto de Prueba 1",
     price: 10000,
     category: "Test",
-    type: "Test"
+    type: "Test",
   },
   {
     id: 2,
@@ -24,12 +23,13 @@ const testProducts = [
     name: "Producto de Prueba 2",
     price: 20000,
     category: "Test",
-    type: "Test"
-  }
+    type: "Test",
+  },
 ];
 
 // Usar productos de prueba si no hay productos reales
-const productsToShow = latestProducts.length > 0 ? latestProducts : testProducts;
+const productsToShow =
+  latestProducts.length > 0 ? latestProducts : testProducts;
 
 export default function News() {
   return (

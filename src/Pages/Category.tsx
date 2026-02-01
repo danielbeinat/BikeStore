@@ -61,15 +61,37 @@ export default function CategoryPage({ Category }: CategoryProps) {
               className="text-sm font-medium text-gray-700 hover:text-[#fbbf24] transition-colors duration-200 flex items-center gap-1"
               onClick={() => window.scrollTo(0, 0)}
             >
-              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
+              <svg
+                className="w-4 h-4"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"
+                />
               </svg>
               Inicio
             </Link>
-            <svg className="w-4 h-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+            <svg
+              className="w-4 h-4 text-gray-400"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M9 5l7 7-7 7"
+              />
             </svg>
-            <span className="text-sm font-semibold text-[#fbbf24] capitalize">{Category}</span>
+            <span className="text-sm font-semibold text-[#fbbf24] capitalize">
+              {Category}
+            </span>
           </motion.div>
 
           {/* Selector de Orden Mejorado */}
@@ -79,7 +101,9 @@ export default function CategoryPage({ Category }: CategoryProps) {
             transition={{ duration: 0.5, delay: 0.1 }}
             className="flex flex-col lg:flex-row lg:items-center items-start gap-3"
           >
-            <span className="text-sm font-medium text-gray-700">Ordenar por:</span>
+            <span className="text-sm font-medium text-gray-700">
+              Ordenar por:
+            </span>
 
             <div className="relative">
               <select
@@ -88,16 +112,22 @@ export default function CategoryPage({ Category }: CategoryProps) {
                 name="sort"
                 onChange={handleSortChange}
               >
-                <option value="Menor a Mayor">
-                  💰 Precio: Menor a Mayor
-                </option>
-                <option value="Mayor a Menor">
-                  💰 Precio: Mayor a Menor
-                </option>
+                <option value="Menor a Mayor">💰 Precio: Menor a Mayor</option>
+                <option value="Mayor a Menor">💰 Precio: Mayor a Menor</option>
               </select>
               <div className="absolute inset-y-0 right-0 flex items-center px-2 pointer-events-none">
-                <svg className="w-4 h-4 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                <svg
+                  className="w-4 h-4 text-gray-500"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M19 9l-7 7-7-7"
+                  />
                 </svg>
               </div>
             </div>

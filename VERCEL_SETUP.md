@@ -3,15 +3,18 @@
 ## Preparación Rápida (2 minutos)
 
 ### 1. Crear cuenta en Vercel
+
 ```bash
 https://vercel.com/signup
 ```
 
 ### 2. Conectar GitHub
+
 - Autoriza Vercel para acceder a tus repositorios
 - Selecciona el repositorio "BiciShoop"
 
 ### 3. Configurar Variables de Entorno
+
 En el dashboard de Vercel:
 
 ```
@@ -21,7 +24,9 @@ NEXT_PUBLIC_ENABLE_DEBUG = false
 ```
 
 ### 4. Deploy
+
 Vercel detecta automáticamente que es un proyecto Next.js y hace:
+
 - `npm install`
 - `npm run build`
 - `npm run start`
@@ -33,7 +38,7 @@ Vercel detecta automáticamente que es un proyecto Next.js y hace:
 ✅ **Zero Config**: Detecta todo automáticamente  
 ✅ **Edge Functions**: Para rutas dinámicas de API  
 ✅ **Analytics**: Dashboard de performance  
-✅ **Previsualización**: Cada PR muestra una preview  
+✅ **Previsualización**: Cada PR muestra una preview
 
 ## Estructura de Deploy
 
@@ -64,6 +69,7 @@ rm -r .next
 ## Dominio Personalizado
 
 En Vercel Dashboard → Settings → Domains:
+
 1. Agrega tu dominio personalizado
 2. Actualiza los registros DNS
 3. Vercel genera SSL automáticamente
@@ -71,14 +77,17 @@ En Vercel Dashboard → Settings → Domains:
 ## Troubleshooting
 
 **Error: "Cannot find module"**
+
 - Verifica que los imports usen `@/src/...`
 - Limpia cache: `rm -r .next`
 
 **Variables de entorno no cargadas**
+
 - Reindeployea después de actualizar variables en Vercel
 - Verifica con `console.log(process.env.NEXT_PUBLIC_API_BASE_URL)`
 
 **Performance lenta**
+
 - Abre Vercel Analytics desde el dashboard
 - Optimiza imágenes con `next/image`
 

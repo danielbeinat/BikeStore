@@ -5,6 +5,7 @@ Aplicación e-commerce de bicicletas migrada de Vite + React Router a **Next.js 
 ## 🚀 Deployment en Vercel (Recomendado)
 
 ### Paso 1: Preparación
+
 ```bash
 git add .
 git commit -m "Migrate from Netlify to Vercel"
@@ -12,6 +13,7 @@ git push origin main
 ```
 
 ### Paso 2: Deploy a Vercel
+
 1. Ve a [vercel.com](https://vercel.com/signup)
 2. Conecta tu GitHub
 3. Selecciona el repositorio "BiciShoop"
@@ -20,6 +22,7 @@ git push origin main
 6. Haz click en "Deploy"
 
 ### Paso 3: Configurar Variables de Entorno
+
 En Vercel Dashboard → Project Settings → Environment Variables:
 
 ```
@@ -91,11 +94,12 @@ BiciShoop/
 ✅ Ordenamiento de productos  
 ✅ Detalle de producto  
 ✅ Responsive Design (mobile, tablet, desktop)  
-✅ Animaciones suaves  
+✅ Animaciones suaves
 
 ## 🔧 Configuración de Vercel
 
 Ver archivo [VERCEL_SETUP.md](./VERCEL_SETUP.md) para:
+
 - Setup detallado de Vercel
 - Variables de entorno
 - Dominio personalizado
@@ -104,6 +108,7 @@ Ver archivo [VERCEL_SETUP.md](./VERCEL_SETUP.md) para:
 ## 📊 Performance
 
 Vercel proporciona:
+
 - Edge Network global
 - Optimización automática de Next.js
 - Analytics en tiempo real
@@ -127,9 +132,11 @@ Vercel proporciona:
 ## 📞 Soporte
 
 Para issues en Vercel:
+
 - [Vercel Support](https://vercel.com/support)
 - [Vercel Docs](https://vercel.com/docs)
 
 Para issues de Next.js:
+
 - [Next.js Docs](https://nextjs.org/docs)
 - [Next.js GitHub Issues](https://github.com/vercel/next.js/issues)

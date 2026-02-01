@@ -76,10 +76,7 @@ export function Footer() {
 
   return (
     <footer className="relative bg-gradient-to-br from-gray-900 via-gray-800 to-black text-white overflow-hidden">
-      {/* Glassmorphism background */}
       <div className="absolute inset-0 bg-white/5 backdrop-blur-sm"></div>
-
-      {/* Main footer content */}
       <div className="relative z-10 container mx-auto px-4 py-16">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -103,8 +100,6 @@ export function Footer() {
                 asesoramiento experto y la mejor experiencia de compra.
               </p>
             </div>
-
-            {/* Features badges */}
             <div className="grid grid-cols-2 gap-3">
               {features.map((feature, index) => (
                 <motion.div
@@ -122,8 +117,6 @@ export function Footer() {
               ))}
             </div>
           </motion.div>
-
-          {/* Navigation */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -178,8 +171,6 @@ export function Footer() {
               ))}
             </ul>
           </motion.div>
-
-          {/* Contact & Social */}
           <motion.div
             initial={{ opacity: 0, x: 20 }}
             animate={{ opacity: 1, x: 0 }}
@@ -207,8 +198,6 @@ export function Footer() {
                 </motion.div>
               ))}
             </div>
-
-            {/* Social Media */}
             <div>
               <h5 className="text-sm font-semibold mb-4 text-gray-200">
                 Síguenos
@@ -232,8 +221,6 @@ export function Footer() {
           </motion.div>
         </motion.div>
       </div>
-
-      {/* Bottom section */}
       <div className="relative border-t border-white/10 bg-black/50 backdrop-blur-sm">
         <div className="container mx-auto px-4 py-8">
           <motion.div
@@ -268,11 +255,6 @@ export function Footer() {
           </motion.div>
         </div>
       </div>
-
-      {/* Decorative elements */}
-      <div className="absolute top-20 left-10 w-32 h-32 bg-[#fbbf24]/5 rounded-full blur-3xl"></div>
-      <div className="absolute bottom-20 right-10 w-40 h-40 bg-blue-500/5 rounded-full blur-3xl"></div>
-      <div className="absolute top-1/2 left-1/3 w-24 h-24 bg-purple-500/5 rounded-full blur-2xl"></div>
     </footer>
   );
 }

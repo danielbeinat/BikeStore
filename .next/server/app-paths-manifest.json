@@ -1,1 +1,15 @@
-{}
+{
+  "/_not-found/page": "app/_not-found/page.js",
+  "/accesorios/page": "app/accesorios/page.js",
+  "/checkout/page": "app/checkout/page.js",
+  "/bicicletas/page": "app/bicicletas/page.js",
+  "/indumentaria/page": "app/indumentaria/page.js",
+  "/novedades/page": "app/novedades/page.js",
+  "/page": "app/page.js",
+  "/product/[id]/page": "app/product/[id]/page.js",
+  "/register/page": "app/register/page.js",
+  "/product/page": "app/product/page.js",
+  "/search/[query]/page": "app/search/[query]/page.js",
+  "/cart/page": "app/cart/page.js",
+  "/login/page": "app/login/page.js"
+}

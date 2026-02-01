@@ -15,6 +15,10 @@ const nextConfig = {
     compiler: {
         removeConsole: process.env.NODE_ENV === 'production',
     },
+    // Allow generation of pages with dynamic content during builds
+    experimental: {
+        isrMemoryCacheSize: 0,
+    },
 }
 
 module.exports = nextConfig

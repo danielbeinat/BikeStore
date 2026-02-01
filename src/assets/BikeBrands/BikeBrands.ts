@@ -10,10 +10,11 @@ import pinarello from "./pinarello.svg";
 import shimano from "./shimano.svg";
 import scott from "./scott.svg";
 import trek from "./trek.svg";
+import { StaticImageData } from "next/image";
 
 interface Bike {
   id: number;
-  img: string;
+  img: StaticImageData;
 }
 export const Bike: Bike[] = [
   { id: 1, img: bianchi },

@@ -50,7 +50,7 @@ export const Slider: React.FC = () => {
       initial={{ opacity: 0, y: 30 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.8, ease: "easeOut" }}
-      className="relative w-full overflow-hidden"
+      className="relative w-full overflow-hidden pt-32 sm:pt-40 md:pt-44 lg:pt-48"
     >
       {/* Glassmorphism Container */}
       <div className="bg-white/10 backdrop-blur-sm rounded-3xl overflow-hidden shadow-2xl border border-white/20">

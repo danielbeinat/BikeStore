@@ -1,11 +1,18 @@
 import { Secure } from "../../assets/securepurchase-resources/securepurchase-resources";
 import { motion } from "framer-motion";
+import { Truck, CreditCard, Package } from "lucide-react";
 
 interface Item {
-  image: string;
+  icon: string;
   title: string;
   description: string;
 }
+
+const iconMap: { [key: string]: React.FC<{ className?: string }> } = {
+  Truck,
+  CreditCard,
+  Package,
+};
 
 export const SecurePurchase: React.FC = () => {
   return (
@@ -50,11 +57,12 @@ export const SecurePurchase: React.FC = () => {
                   whileHover={{ scale: 1.1, rotate: 5 }}
                   className="relative mb-6 p-4 bg-gradient-to-br from-[#fbbf24]/20 to-[#f59e0b]/20 rounded-2xl border border-white/30 group-hover:from-[#fbbf24]/30 group-hover:to-[#f59e0b]/30 transition-all duration-300"
                 >
-                  <img
-                    className="w-16 h-16 object-contain filter brightness-0 group-hover:brightness-100 transition-all duration-300"
-                    src={item.image}
-                    alt={item.title}
-                  />
+                  {iconMap[item.icon] && 
+                    (() => {
+                      const IconComponent = iconMap[item.icon];
+                      return <IconComponent className="w-16 h-16 text-[#fbbf24] group-hover:text-[#f59e0b] transition-colors duration-300" />;
+                    })()
+                  }
                   {/* Glow effect */}
                   <div className="absolute inset-0 bg-[#fbbf24]/10 rounded-2xl opacity-0 group-hover:opacity-100 blur-xl transition-opacity duration-300"></div>
                 </motion.div>

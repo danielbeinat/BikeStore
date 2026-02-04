@@ -30,10 +30,14 @@ export const SecurePurchase: React.FC = () => {
         >
           <h2 className="text-3xl md:text-4xl font-bold text-gray-800 mb-4">
             Compra con
-            <span className="bg-gradient-to-r from-[#fbbf24] to-[#f59e0b] bg-clip-text text-transparent"> total confianza</span>
+            <span className="bg-gradient-to-r from-[#fbbf24] to-[#f59e0b] bg-clip-text text-transparent">
+              {" "}
+              total confianza
+            </span>
           </h2>
           <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-            Disfrutá de una experiencia de compra segura con beneficios exclusivos
+            Disfrutá de una experiencia de compra segura con beneficios
+            exclusivos
           </p>
         </motion.div>
 
@@ -57,12 +61,13 @@ export const SecurePurchase: React.FC = () => {
                   whileHover={{ scale: 1.1, rotate: 5 }}
                   className="relative mb-6 p-4 bg-gradient-to-br from-[#fbbf24]/20 to-[#f59e0b]/20 rounded-2xl border border-white/30 group-hover:from-[#fbbf24]/30 group-hover:to-[#f59e0b]/30 transition-all duration-300"
                 >
-                  {iconMap[item.icon] && 
+                  {iconMap[item.icon] &&
                     (() => {
                       const IconComponent = iconMap[item.icon];
-                      return <IconComponent className="w-16 h-16 text-[#fbbf24] group-hover:text-[#f59e0b] transition-colors duration-300" />;
-                    })()
-                  }
+                      return (
+                        <IconComponent className="w-16 h-16 text-[#fbbf24] group-hover:text-[#f59e0b] transition-colors duration-300" />
+                      );
+                    })()}
                   {/* Glow effect */}
                   <div className="absolute inset-0 bg-[#fbbf24]/10 rounded-2xl opacity-0 group-hover:opacity-100 blur-xl transition-opacity duration-300"></div>
                 </motion.div>
@@ -94,7 +99,10 @@ export const SecurePurchase: React.FC = () => {
 
               {/* Floating elements */}
               <div className="absolute -top-4 -right-4 w-8 h-8 bg-[#fbbf24]/20 rounded-full blur-lg opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-              <div className="absolute -bottom-4 -left-4 w-6 h-6 bg-blue-500/20 rounded-full blur-md opacity-0 group-hover:opacity-100 transition-opacity duration-500" style={{ animationDelay: '0.2s' }}></div>
+              <div
+                className="absolute -bottom-4 -left-4 w-6 h-6 bg-blue-500/20 rounded-full blur-md opacity-0 group-hover:opacity-100 transition-opacity duration-500"
+                style={{ animationDelay: "0.2s" }}
+              ></div>
             </motion.div>
           ))}
         </div>
@@ -109,22 +117,54 @@ export const SecurePurchase: React.FC = () => {
           <div className="inline-flex items-center gap-3 bg-white/80 backdrop-blur-md rounded-2xl border border-white/30 px-6 py-3 shadow-lg">
             <div className="flex -space-x-2">
               <div className="w-8 h-8 bg-green-500 rounded-full flex items-center justify-center">
-                <svg className="w-4 h-4 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                <svg
+                  className="w-4 h-4 text-white"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M5 13l4 4L19 7"
+                  />
                 </svg>
               </div>
               <div className="w-8 h-8 bg-blue-500 rounded-full flex items-center justify-center">
-                <svg className="w-4 h-4 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+                <svg
+                  className="w-4 h-4 text-white"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"
+                  />
                 </svg>
               </div>
               <div className="w-8 h-8 bg-purple-500 rounded-full flex items-center justify-center">
-                <svg className="w-4 h-4 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
+                <svg
+                  className="w-4 h-4 text-white"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M13 10V3L4 14h7v7l9-11h-7z"
+                  />
                 </svg>
               </div>
             </div>
-            <span className="text-sm font-semibold text-gray-700">Compra 100% segura garantizada</span>
+            <span className="text-sm font-semibold text-gray-700">
+              Compra 100% segura garantizada
+            </span>
           </div>
         </motion.div>
       </div>

@@ -11,7 +11,7 @@ interface Item {
 
 export const Brands: React.FC = () => {
   return (
-    <section className="py-24 bg-gradient-to-br font-poppins from-gray-50 to-gray-100">
+    <section className="py-24 bg-gradient-to-br font-poppins from-gray-50 to-gray-100 scroll-mt-40">
       <div className="container mx-auto px-4">
         <h2 className="text-3xl font-bold text-center mb-12 text-gray-800">
           Nuestras Marcas

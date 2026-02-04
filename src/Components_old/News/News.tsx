@@ -43,7 +43,7 @@ interface Product {
 export const News: React.FC = () => {
   return (
     <>
-      <div className="font-poppins my-24 px-4 lg:px-5">
+      <div className="font-poppins my-24 px-4 lg:px-5 scroll-mt-40">
         <h1 className="text-center font-bold text-gray-800  p-8 text-4xl">
           Novedades
         </h1>

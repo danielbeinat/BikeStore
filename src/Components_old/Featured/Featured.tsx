@@ -20,7 +20,7 @@ const bike: Product[] = filter.slice(0, 4);
 export const Featured: React.FC = () => {
   return (
     <>
-      <div className="font-poppins mt-10 mb-10 px-4 lg:px-5">
+      <div className="font-poppins mt-10 mb-10 px-4 lg:px-5 scroll-mt-40">
         <h1 className="text-center text-gray-800 font-bold p-8 text-4xl">
           Destacados
         </h1>

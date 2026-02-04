@@ -16,7 +16,7 @@ const iconMap: { [key: string]: React.FC<{ className?: string }> } = {
 
 export const SecurePurchase: React.FC = () => {
   return (
-    <section className="relative py-20 px-4 overflow-hidden">
+    <section className="relative py-20 px-4 overflow-hidden scroll-mt-40">
       {/* Background with glassmorphism */}
       <div className="absolute inset-0 bg-gradient-to-br from-blue-50/30 via-white to-purple-50/30"></div>
       <div className="absolute inset-0 bg-white/5 backdrop-blur-sm"></div>

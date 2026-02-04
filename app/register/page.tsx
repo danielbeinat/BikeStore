@@ -7,7 +7,7 @@ import Footer from "@/src/components/Footer/Footer";
 import ChatBox from "@/src/components/ChatBox/ChatBox";
 import NewLetter from "@/src/components/NewsLetter/NewLetter";
 
-export const dynamic = "force-dynamic";
+export const dynamic = "force-static";
 
 export default function RegisterPage() {
   return (
